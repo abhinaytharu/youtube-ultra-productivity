@@ -1,0 +1,247 @@
+YOUTUBE ELEMENT SELECTORS REFERENCE
+=====================================
+
+HEADER AND NAVIGATION
+---------------------
+#logo - YouTube logo
+#logo-icon - YouTube logo icon
+#logo-icon-container - Logo container
+input#search - Search input field
+#search-icon-legacy - Search button
+#search-form - Search form container
+#voice-search-button - Voice search button
+button#avatar-btn - Profile picture / account button
+#avatar-menu - Profile dropdown menu
+#create-icon - Create button (upload)
+#create-menu - Create dropdown menu
+#notification-button - Notifications bell
+#guide-button - Apps/menu button
+ytd-masthead - Main header container
+#masthead-container - Header container
+
+SIDEBAR MENU (GUIDE)
+--------------------
+ytd-guide-renderer - Main sidebar
+#guide-inner-content - Sidebar content
+a[title="Home"] - Home link
+a[title="Shorts"] - Shorts link
+a[title="Subscriptions"] - Subscriptions link
+a[title="Library"] - Library link
+a[title="History"] - History link
+a[title="Watch later"] - Watch later link
+a[title="Liked videos"] - Liked videos link
+a[title="Trending"] - Trending link
+a[title="Music"] - Music link
+a[title="Gaming"] - Gaming link
+a[title="News"] - News link
+a[title="Sports"] - Sports link
+a[title="Learning"] - Learning link
+a[title="Fashion & Beauty"] - Fashion link
+ytd-mini-guide-renderer - Mini sidebar for mobile
+
+VIDEO PLAYER AREA
+-----------------
+#player - Main player container
+#player-container-outer - Outer player wrapper
+#movie_player - Video player element
+.html5-video-player - HTML5 video player
+video - Actual video element
+#player-theater-container - Theater mode container
+ytd-watch-flexy - Watch page container
+
+PLAYER CONTROLS
+---------------
+.ytp-chrome-bottom - Bottom control bar
+.ytp-chrome-top - Top control bar
+.ytp-play-button - Play/pause button
+.ytp-progress-bar - Progress bar
+.ytp-progress-bar-container - Progress container
+.ytp-time-display - Time display
+.ytp-current-time - Current time
+.ytp-duration - Video duration
+.ytp-mute-button - Volume button
+.ytp-volume-panel - Volume slider
+.ytp-settings-button - Settings button
+.ytp-fullscreen-button - Fullscreen button
+.ytp-size-button - Theater mode button
+.ytp-quality-button - Quality button
+.ytp-subtitles-button - Captions button
+.ytp-playback-rate-button - Playback speed button
+.ytp-left-controls - Left control group
+.ytp-right-controls - Right control group
+
+VIDEO INFO AND BUTTONS
+---------------------
+h1.title - Video title
+#title - Title container
+#info - Video info section
+#info-contents - Info contents
+#meta - Video metadata
+#meta-contents - Meta contents
+ytd-video-secondary-info-renderer - Secondary info
+#description - Video description
+#description-text - Description text
+#more - Show more button
+#less - Show less button
+
+ACTION BUTTONS
+--------------
+#top-level-buttons-computed #segmented-like-button - Like button
+#top-level-buttons-computed #segmented-dislike-button - Dislike button
+#top-level-buttons-computed #segmented-share-button - Share button
+#top-level-buttons-computed #segmented-save-button - Save button
+#subscribe-button - Subscribe button
+ytd-subscribe-button-renderer tp-yt-paper-button - Subscribe paper button
+#notification-preference-button - Notification bell
+#join-button - Join button (membership)
+
+VIDEO STATS
+-----------
+#count - View count
+#segmented-like-button #text - Like count
+#segmented-dislike-button #text - Dislike count
+
+COMMENTS SECTION
+----------------
+#comments - Comments container
+#comments-header - Comments header
+#comments-title - Comments title
+#contents - Comments contents
+ytd-comment-thread-renderer - Individual comment threads
+#simple-box - Comment input box
+#submit-button - Submit comment button
+#sort-menu-button - Sort comments button
+#count-text - Comments count
+
+SUGGESTED VIDEOS / SIDEBAR
+---------------------------
+#secondary - Right sidebar
+#secondary-inner - Sidebar inner content
+#related - Related videos section
+ytd-watch-next-secondary-results-renderer - Watch next results
+ytd-compact-video-renderer - Compact video items
+ytd-playlist-panel-renderer - Playlist panel
+ytd-playlist-video-renderer - Playlist items
+
+CHANNEL PAGE
+------------
+ytd-channel-header-renderer - Channel header
+#channel-name - Channel name
+#subscriber-count - Subscriber count
+#description - Channel description
+#tabs - Channel tabs
+#tabs #tabsContent #home - Home tab
+#tabs #tabsContent #videos - Videos tab
+#tabs #tabsContent #playlists - Playlists tab
+#tabs #tabsContent #shorts - Shorts tab
+#tabs #tabsContent #live - Live tab
+#tabs #tabsContent #about - About tab
+
+SHORTS PAGE
+-----------
+ytd-shorts - Shorts container
+ytd-shorts-player - Shorts player
+ytd-shorts video - Shorts video element
+ytd-shorts-info-renderer - Shorts info
+#title - Shorts title
+#channel-name - Shorts channel
+#like-button - Shorts like button
+#dislike-button - Shorts dislike button
+#share-button - Shorts share button
+#comment-button - Shorts comment button
+#more-button - Shorts more button
+
+SEARCH RESULTS
+--------------
+#contents - Search results container
+#filter-menu - Search filters
+#filter-button - Filter button
+#sort-menu-button - Sort button
+ytd-video-renderer - Video result items
+ytd-channel-renderer - Channel result items
+ytd-playlist-renderer - Playlist result items
+
+HOME PAGE / FEED
+----------------
+#page-manager - Page manager
+#primary - Primary content area
+#columns - Main columns container
+ytd-rich-grid-renderer - Rich grid (home feed)
+ytd-rich-item-renderer - Rich items
+ytd-grid-video-renderer - Grid video items
+ytd-video-renderer - Video items
+ytd-shelf-renderer - Shelf sections
+
+GENERAL ELEMENTS
+----------------
+ytd-thumbnail img - All thumbnails
+ytd-thumbnail - Thumbnail containers
+#video-title - All video titles
+#channel-name - All channel names
+#metadata-line span - All view counts
+.ytd-thumbnail-overlay-time-status-renderer - Video durations
+tp-yt-paper-button - Paper buttons
+tp-yt-paper-icon-button - Paper icon buttons
+ytd-menu-renderer - Menu buttons
+ytd-popup-container - Popup containers
+tp-yt-paper-dialog - Dialog boxes
+ytd-toast - Toast notifications
+
+LIVE CHAT (LIVE STREAMS)
+------------------------
+ytd-live-chat-renderer - Live chat container
+#chatframe - Live chat iframe
+ytd-live-chat-text-message-renderer - Chat messages
+#input - Chat input
+#send-button - Send button
+ytd-live-chat-membership-item-renderer - Membership messages
+ytd-live-chat-paid-message-renderer - Super chat messages
+
+MOBILE ELEMENTS
+---------------
+ytd-mini-guide-renderer - Mobile mini guide
+ytd-player - Mobile player
+.ytp-mobile-controls - Mobile controls
+.ytp-mobile-progress-bar - Mobile progress bar
+
+UTILITY FUNCTIONS
+-----------------
+getVideoId() - Get current video ID from URL
+isShortsPage() - Check if on Shorts page
+isChannelPage() - Check if on Channel page
+isSearchPage() - Check if on Search page
+isHomePage() - Check if on Home page
+
+USAGE EXAMPLES
+==============
+
+// Get video title
+const title = document.querySelector('h1.title');
+
+// Get all thumbnails
+const thumbnails = document.querySelectorAll('ytd-thumbnail img');
+
+// Get like button
+const likeButton = document.querySelector('#top-level-buttons-computed #segmented-like-button');
+
+// Get subscribe button
+const subscribeButton = document.querySelector('#subscribe-button');
+
+// Get comments section
+const comments = document.querySelector('#comments');
+
+// Get player container
+const player = document.querySelector('#player');
+
+// Check page type
+if (isShortsPage()) {
+    // Apply Shorts-specific styling
+}
+
+if (isChannelPage()) {
+    // Apply Channel-specific styling
+}
+
+if (isSearchPage()) {
+    // Apply Search-specific styling
+}

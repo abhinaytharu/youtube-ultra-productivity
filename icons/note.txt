@@ -1,0 +1,1 @@
+Placeholders included. Replace `icon.svg` and export PNGs using `icons/generate-icons.ps1` if desired.

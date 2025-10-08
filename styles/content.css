@@ -1,0 +1,1047 @@
+/* Use local Fira Code if available — removed remote import since you have it installed locally */
+/* (If the OS has Fira Code installed, browsers will pick it up via the font-family below.) */
+
+/* Topbar toggle (small pill in the masthead) */
+/* temp css */
+
+/* Windows XP Dark Theme YouTube CSS */
+/* Base Dark XP Theme */
+body {
+    background: #1a1a1a !important;
+    font-family: "Tahoma", "MS Sans Serif", sans-serif !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* HEADER AND NAVIGATION - XP Dark Start Menu Style */
+  ytd-masthead,
+  #masthead-container {
+    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a) !important;
+    border-bottom: 2px solid #404040 !important;
+    box-shadow: inset 1px 1px 0px #555555 !important;
+  }
+  
+  #logo-icon-container {
+    background: #2a2a2a !important;
+    border: 1px solid #404040 !important;
+    border-radius: 0 !important;
+    padding: 4px !important;
+  }
+  
+  #search-form {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    padding: 2px !important;
+  }
+  
+  input#search {
+    background: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border: none !important;
+    font-family: "Tahoma" !important;
+    font-size: 11px !important;
+  }
+  
+  input#search::placeholder {
+    color: #888888 !important;
+  }
+  
+  #search-icon-legacy,
+  #voice-search-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    margin: 0 2px !important;
+    font-family: "Marlett" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #create-icon,
+  #notification-button,
+  #guide-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    font-family: "Marlett" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  button#avatar-btn {
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    background: #404040 !important;
+  }
+  
+  #avatar-menu,
+  #create-menu {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.4) !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* SIDEBAR MENU - XP Dark Start Menu Style */
+  ytd-guide-renderer,
+  #guide-inner-content {
+    background: #2a2a2a !important;
+    border-right: 2px outset #404040 !important;
+    border-bottom: 2px outset #404040 !important;
+  }
+  
+  ytd-mini-guide-renderer {
+    background: #2a2a2a !important;
+    border-top: 2px outset #404040 !important;
+  }
+  
+  a[title="Home"],
+  a[title="Shorts"],
+  a[title="Subscriptions"],
+  a[title="Library"],
+  a[title="History"],
+  a[title="Watch later"],
+  a[title="Liked videos"],
+  a[title="Trending"],
+  a[title="Music"],
+  a[title="Gaming"],
+  a[title="News"],
+  a[title="Sports"],
+  a[title="Learning"],
+  a[title="Fashion & Beauty"] {
+    background: #2a2a2a !important;
+    border: 1px solid transparent !important;
+    border-radius: 0 !important;
+    margin: 1px 4px !important;
+    color: #e0e0e0 !important;
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+  }
+  
+  a[title]:hover {
+    background: #0078d7 !important;
+    color: #ffffff !important;
+    border: 1px dotted #ffffff !important;
+  }
+  
+  /* VIDEO PLAYER AREA - XP Dark Window Style */
+  #player,
+  #player-container-outer,
+  #movie_player,
+  .html5-video-player {
+    background: #000000 !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  #player-theater-container {
+    background: #000000 !important;
+    border: none !important;
+  }
+  
+  ytd-watch-flexy {
+    background: #1a1a1a !important;
+  }
+  
+  video {
+    border-radius: 0 !important;
+  }
+  
+  /* PLAYER CONTROLS - XP Dark Taskbar Style */
+  .ytp-chrome-bottom,
+  .ytp-chrome-top {
+    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a) !important;
+    border: 1px outset #404040 !important;
+  }
+  
+  .ytp-progress-bar-container {
+    background: #404040 !important;
+    border: 2px inset #555555 !important;
+    border-radius: 0 !important;
+  }
+  
+  .ytp-progress-bar {
+    background: linear-gradient(to bottom, #0078d7, #005a9e) !important;
+    border-radius: 0 !important;
+  }
+  
+  .ytp-play-button,
+  .ytp-mute-button,
+  .ytp-settings-button,
+  .ytp-fullscreen-button,
+  .ytp-size-button,
+  .ytp-quality-button,
+  .ytp-subtitles-button,
+  .ytp-playback-rate-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    font-family: "Marlett" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  .ytp-volume-panel {
+    background: #404040 !important;
+    border: 2px inset #555555 !important;
+    border-radius: 0 !important;
+  }
+  
+  .ytp-time-display {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    padding: 2px 6px !important;
+    color: #e0e0e0 !important;
+    font-family: "Fixedsys" !important;
+  }
+  
+  /* VIDEO INFO AND BUTTONS - XP Dark Window Content */
+  h1.title,
+  #title,
+  #info,
+  #meta,
+  #description {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+    padding: 8px !important;
+  }
+  
+  #description-text {
+    color: #cccccc !important;
+    font-size: 11px !important;
+  }
+  
+  #more,
+  #less {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+    font-size: 11px !important;
+  }
+  
+  /* ACTION BUTTONS - XP Dark Buttons */
+  #segmented-like-button,
+  #segmented-dislike-button,
+  #segmented-share-button,
+  #segmented-save-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    margin: 0 2px !important;
+    font-size: 11px !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #subscribe-button,
+  ytd-subscribe-button-renderer tp-yt-paper-button {
+    background: linear-gradient(to bottom, #c42b1c, #a82519) !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+  }
+  
+  #notification-preference-button,
+  #join-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* VIDEO STATS */
+  #count,
+  #segmented-like-button #text,
+  #segmented-dislike-button #text {
+    background: #2a2a2a !important;
+    border: 1px inset #404040 !important;
+    border-radius: 0 !important;
+    padding: 2px 4px !important;
+    color: #cccccc !important;
+    font-size: 10px !important;
+  }
+  
+  /* COMMENTS SECTION - XP Dark Window Style */
+  #comments,
+  #comments-header {
+    background: #2a2a2a !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+    margin: 8px 0 !important;
+  }
+  
+  #simple-box {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    font-family: "Tahoma" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #submit-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+    font-size: 11px !important;
+  }
+  
+  #sort-menu-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  ytd-comment-thread-renderer {
+    background: #333333 !important;
+    border: 1px inset #404040 !important;
+    border-radius: 0 !important;
+    margin: 4px 0 !important;
+    padding: 8px !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* SUGGESTED VIDEOS / SIDEBAR */
+  #secondary,
+  #secondary-inner {
+    background: #2a2a2a !important;
+    border-left: 2px outset #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  ytd-compact-video-renderer,
+  ytd-playlist-video-renderer {
+    background: #333333 !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    margin: 4px 0 !important;
+    padding: 6px !important;
+    color: #e0e0e0 !important;
+  }
+  
+  ytd-playlist-panel-renderer {
+    background: #2a2a2a !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  /* CHANNEL PAGE */
+  ytd-channel-header-renderer {
+    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a) !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #channel-name,
+  #subscriber-count,
+  #description {
+    background: transparent !important;
+    border: none !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #tabs,
+  #tabs #tabsContent #home,
+  #tabs #tabsContent #videos,
+  #tabs #tabsContent #playlists,
+  #tabs #tabsContent #shorts,
+  #tabs #tabsContent #live,
+  #tabs #tabsContent #about {
+    background: #2a2a2a !important;
+    border: 2px outset #404040 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* SHORTS PAGE */
+  ytd-shorts,
+  ytd-shorts-player {
+    background: #000000 !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  ytd-shorts video {
+    border-radius: 0 !important;
+  }
+  
+  ytd-shorts-info-renderer {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #like-button,
+  #dislike-button,
+  #share-button,
+  #comment-button,
+  #more-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    font-family: "Marlett" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* SEARCH RESULTS */
+  #contents {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  #filter-menu,
+  #sort-menu-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  ytd-video-renderer,
+  ytd-channel-renderer,
+  ytd-playlist-renderer {
+    background: #333333 !important;
+    border: 1px inset #404040 !important;
+    border-radius: 0 !important;
+    margin: 4px 0 !important;
+    padding: 8px !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* HOME PAGE / FEED */
+  #page-manager,
+  #primary {
+    background: #1a1a1a !important;
+  }
+  
+  #columns {
+    background: #1a1a1a !important;
+    border: none !important;
+  }
+  
+  ytd-rich-grid-renderer,
+  ytd-rich-item-renderer,
+  ytd-grid-video-renderer,
+  ytd-video-renderer,
+  ytd-shelf-renderer {
+    background: #2a2a2a !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+    margin: 8px !important;
+    padding: 12px !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* GENERAL ELEMENTS */
+  ytd-thumbnail {
+    border-radius: 0 !important;
+    border: 1px inset #404040 !important;
+  }
+  
+  ytd-thumbnail img {
+    border-radius: 0 !important;
+    filter: brightness(0.9) !important;
+  }
+  
+  #video-title,
+  #channel-name,
+  #metadata-line span {
+    color: #e0e0e0 !important;
+    text-shadow: none !important;
+    font-family: "Tahoma" !important;
+  }
+  
+  .ytd-thumbnail-overlay-time-status-renderer {
+    background: #000000 !important;
+    border: 1px solid #404040 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+    font-family: "Tahoma" !important;
+  }
+  
+  tp-yt-paper-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+    font-family: "Tahoma" !important;
+    font-size: 11px !important;
+  }
+  
+  tp-yt-paper-icon-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    font-family: "Marlett" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  ytd-menu-renderer {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+  }
+  
+  ytd-popup-container,
+  tp-yt-paper-dialog {
+    background: #404040 !important;
+    border: 3px outset #555555 !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.6) !important;
+    color: #e0e0e0 !important;
+  }
+  
+  ytd-toast {
+    background: #333333 !important;
+    border: 2px outset #404040 !important;
+    border-radius: 0 !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* LIVE CHAT */
+  ytd-live-chat-renderer {
+    background: #2a2a2a !important;
+    border: 3px outset #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  #chatframe {
+    border-radius: 0 !important;
+  }
+  
+  ytd-live-chat-text-message-renderer,
+  ytd-live-chat-membership-item-renderer,
+  ytd-live-chat-paid-message-renderer {
+    background: #333333 !important;
+    border: 1px inset #404040 !important;
+    border-radius: 0 !important;
+    margin: 2px 0 !important;
+    padding: 4px !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #input {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+    border-radius: 0 !important;
+    font-family: "Tahoma" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  #send-button {
+    background: #404040 !important;
+    border: 2px outset #555555 !important;
+    border-radius: 0 !important;
+    font-family: "Marlett" !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* MOBILE ELEMENTS */
+  .ytp-mobile-controls {
+    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a) !important;
+    border-top: 2px outset #404040 !important;
+  }
+  
+  .ytp-mobile-progress-bar {
+    background: #404040 !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Dark XP Scrollbars */
+  ::-webkit-scrollbar {
+    width: 16px;
+    background: #2a2a2a;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #2a2a2a;
+    border: 1px inset #404040;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #404040;
+    border: 2px outset #555555;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+  }
+  
+  /* Dark XP Button Active States */
+  tp-yt-paper-button:active,
+  #search-icon-legacy:active,
+  #voice-search-button:active,
+  .ytp-play-button:active,
+  .ytp-mute-button:active {
+    border: 2px inset #555555 !important;
+    background: #555555 !important;
+  }
+  
+  /* Dark XP Focus Effects */
+  input#search:focus,
+  #simple-box:focus,
+  #input:focus {
+    background: #333333 !important;
+    border: 2px inset #0078d7 !important;
+    outline: none !important;
+    color: #ffffff !important;
+  }
+  
+  /* Dark XP Selection Colors */
+  ::selection {
+    background: #0078d7 !important;
+    color: #ffffff !important;
+  }
+  
+  /* Dark XP Classic Title Bar Effect */
+  #player-container-outer::before {
+    content: "Windows Media Player";
+    display: block;
+    background: linear-gradient(to bottom, #2a2a2a, #1a1a1a);
+    color: #e0e0e0;
+    padding: 4px 8px;
+    font-family: "Tahoma";
+    font-size: 11px;
+    font-weight: bold;
+    border-bottom: 1px solid #404040;
+  }
+  
+  /* Dark XP Taskbar Style for Progress */
+  .ytp-progress-bar-container {
+    position: relative;
+  }
+  
+  .ytp-progress-bar-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #0078d7;
+    pointer-events: none;
+  }
+  
+  /* Dark Theme Enhancements */
+  #video-preview {
+    background: #2a2a2a !important;
+    border: 2px outset #404040 !important;
+  }
+  
+  ytd-searchbox {
+    background: #2a2a2a !important;
+    border: 2px inset #404040 !important;
+  }
+  
+  /* Hover effects for dark theme */
+  ytd-rich-item-renderer:hover,
+  ytd-compact-video-renderer:hover,
+  ytd-video-renderer:hover {
+    background: #333333 !important;
+    border-color: #555555 !important;
+  }
+  
+  /* Dark theme text contrast improvements */
+  #metadata-line,
+  #byline,
+  #description-text {
+    color: #cccccc !important;
+  }
+  
+  /* Subscription button hover states */
+  #subscribe-button:hover,
+  ytd-subscribe-button-renderer tp-yt-paper-button:hover {
+    background: linear-gradient(to bottom, #d93626, #b82a1d) !important;
+  }
+  
+  /* Navigation improvements for dark theme */
+  #guide-button:hover,
+  #notification-button:hover,
+  #create-icon:hover {
+    background: #555555 !important;
+  }
+  
+  /* Dark theme scrollbar corner */
+  ::-webkit-scrollbar-corner {
+    background: #2a2a2a;
+    border: 1px inset #404040;
+  }
+
+  /* Fullscreen Header Hide Styles */
+html:fullscreen #masthead-container,
+html:-webkit-full-screen #masthead-container,
+html:-moz-full-screen #masthead-container,
+html:-ms-fullscreen #masthead-container {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-100%) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Fullscreen detection for video player */
+#movie_player:fullscreen #masthead-container,
+#movie_player:-webkit-full-screen #masthead-container,
+#movie_player:-moz-full-screen #masthead-container,
+#movie_player:-ms-fullscreen #masthead-container,
+.video-stream:fullscreen ~ #masthead-container,
+.video-stream:-webkit-full-screen ~ #masthead-container,
+.video-stream:-moz-full-screen ~ #masthead-container,
+.video-stream:-ms-fullscreen ~ #masthead-container {
+  display: none !important;
+  opacity: 0 !important;
+}
+
+/* Alternative selectors for fullscreen mode */
+:-webkit-full-screen #masthead-container,
+:-moz-full-screen #masthead-container,
+:-ms-fullscreen #masthead-container,
+:fullscreen #masthead-container {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Ensure player expands properly when header is hidden */
+:-webkit-full-screen #page-manager,
+:-moz-full-screen #page-manager,
+:-ms-fullscreen #page-manager,
+:fullscreen #page-manager {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Hide related elements in fullscreen */
+:-webkit-full-screen ytd-masthead,
+:-moz-full-screen ytd-masthead,
+:-ms-fullscreen ytd-masthead,
+:fullscreen ytd-masthead {
+  display: none !important;
+}
+
+/* Smooth transition for header when entering/exiting fullscreen */
+ytd-masthead,
+#masthead-container {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Additional fullscreen detection methods */
+/* Method 1: Using attribute selectors */
+[fullscreen="true"] #masthead-container,
+[data-fullscreen="true"] #masthead-container {
+  display: none !important;
+}
+
+/* Method 2: Using class-based detection */
+body.yt-fullscreen #masthead-container,
+body.ytp-fullscreen #masthead-container,
+html.yt-fullscreen #masthead-container,
+html.ytp-fullscreen #masthead-container {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Method 3: Using player state detection */
+.ytp-fullscreen #masthead-container,
+.ytp-fullscreen ytd-masthead {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Ensure the page content adjusts when header is hidden */
+.ytp-fullscreen #page-manager,
+.ytp-fullscreen #columns,
+.ytp-fullscreen #primary {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Hide mini guide in fullscreen */
+:-webkit-full-screen ytd-mini-guide-renderer,
+:-moz-full-screen ytd-mini-guide-renderer,
+:-ms-fullscreen ytd-mini-guide-renderer,
+:fullscreen ytd-mini-guide-renderer {
+  display: none !important;
+}
+
+/* Mobile fullscreen support */
+.ytp-fullscreen .ytp-mobile-top-controls,
+.ytp-fullscreen #masthead-container {
+  display: none !important;
+}
+
+/* Theater mode compatibility */
+.ytp-theater #masthead-container {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-100%) !important;
+}
+
+/* Smooth reappearance when exiting fullscreen */
+#masthead-container:not(:fullscreen) {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Additional safety rules to ensure header stays hidden in fullscreen */
+video:fullscreen ~ #masthead-container,
+#movie_player.ytp-fullscreen ~ #masthead-container,
+.html5-video-player.ytp-fullscreen ~ #masthead-container {
+  display: none !important;
+  opacity: 0 !important;
+  height: 0 !important;
+}
+
+/* Hide search bar and other header elements individually in fullscreen */
+:-webkit-full-screen #search-form,
+:-moz-full-screen #search-form,
+:-ms-fullscreen #search-form,
+:fullscreen #search-form,
+:-webkit-full-screen #logo-icon-container,
+:-moz-full-screen #logo-icon-container,
+:-ms-fullscreen #logo-icon-container,
+:fullscreen #logo-icon-container,
+:-webkit-full-screen #guide-button,
+:-moz-full-screen #guide-button,
+:-ms-fullscreen #guide-button,
+:fullscreen #guide-button {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Emergency override - nuclear option for fullscreen */
+body:has(#movie_player.ytp-fullscreen) #masthead-container,
+body:has(.html5-video-player.ytp-fullscreen) #masthead-container,
+body:has(video:fullscreen) #masthead-container {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: -1000px !important;
+  left: -1000px !important;
+}
+
+/* Animation for smooth header hide/show */
+@keyframes hideHeader {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes showHeader {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ytp-fullscreen ytd-masthead {
+  animation: hideHeader 0.3s ease-in-out forwards !important;
+}
+
+ytd-masthead:not(.ytp-fullscreen) {
+  animation: showHeader 0.3s ease-in-out forwards !important;
+}
+
+/* Ensure player controls don't interfere with header */
+.ytp-chrome-top {
+  z-index: 9999 !important;
+}
+
+#masthead-container {
+  z-index: 9998 !important;
+}
+
+/* Fix for any potential layout shifts */
+#page-manager {
+  transition: margin-top 0.3s ease-in-out !important;
+}
+
+.ytp-fullscreen #page-manager {
+  margin-top: 0 !important;
+}
+
+/* Additional browser-specific fullscreen rules */
+/* WebKit (Chrome, Safari) */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #movie_player:-webkit-full-screen ~ #masthead-container {
+    display: none !important;
+  }
+}
+
+/* Firefox */
+@-moz-document url-prefix() {
+  #movie_player:-moz-full-screen ~ #masthead-container {
+    display: none !important;
+  }
+}
+
+/* Edge */
+@supports (-ms-ime-align: auto) {
+  #movie_player:-ms-fullscreen ~ #masthead-container {
+    display: none !important;
+  }
+}
+
+/* Final comprehensive fullscreen header hide */
+:fullscreen #masthead-container,
+:fullscreen ytd-masthead,
+#movie_player:fullscreen ~ #masthead-container,
+#movie_player:fullscreen ~ ytd-masthead,
+.video-stream:fullscreen ~ #masthead-container,
+.video-stream:fullscreen ~ ytd-masthead,
+.ytp-fullscreen #masthead-container,
+.ytp-fullscreen ytd-masthead,
+[fullscreen] #masthead-container,
+[fullscreen] ytd-masthead {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(-100%) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#yt-minimal-topbar-toggle{
+    display:inline-flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    padding:6px 10px !important;
+    height:36px !important;
+    border-radius:999px !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+    border:1px solid rgba(255,255,255,0.04) !important;
+    color:var(--text) !important;
+    font-weight:600 !important;
+    font-size:13px !important;
+    cursor:pointer !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.55) !important;
+    backdrop-filter: blur(6px) saturate(110%) !important;
+    -webkit-backdrop-filter: blur(6px) saturate(110%) !important;
+    transition: transform 150ms ease, box-shadow 150ms ease, background 150ms ease !important;
+}
+
+/* Hover / focus interactions */
+#yt-minimal-topbar-toggle:hover,
+#yt-minimal-topbar-toggle:focus{
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+}
+
+/* Active / On state (neon accent) */
+#yt-minimal-topbar-toggle[data-state='on']{
+    background: linear-gradient(180deg, rgba(30,167,255,0.12), rgba(30,167,255,0.06)) !important;
+    border: 1px solid rgba(30,167,255,0.22) !important;
+    box-shadow: 0 10px 30px rgba(30,167,255,0.06), 0 4px 14px rgba(2,6,23,0.6) !important;
+}
+
+/* Small icon inside the toggle (if present) */
+#yt-minimal-topbar-toggle img, #yt-minimal-topbar-toggle svg{
+    width:18px !important;
+    height:18px !important;
+    display:block !important;
+}
+
+/* Make sure it fits well inside YouTube's masthead */
+[data-yt-minimal='on'] #masthead-container #yt-minimal-topbar-toggle{
+    margin-left:8px !important;
+}
+
+/* Force local Fira Code across primary YouTube containers (use !important to override site styles). */
+/* [data-yt-minimal='on'] html,
+[data-yt-minimal='on'] body,
+[data-yt-minimal='on'] ytd-app,
+[data-yt-minimal='on'] #content,
+[data-yt-minimal='on'] #columns,
+[data-yt-minimal='on'] #primary,
+[data-yt-minimal='on'] #secondary{
+    font-family: 'Fira Code', 'Segoe UI', Inter, Roboto, Arial, system-ui, monospace !important;
+    font-variant-ligatures: discretionary-ligatures contextual common-ligatures !important;
+    color: green;
+} */
+
+/* Respect device theme: light and dark variations for the toggle */
+@media (prefers-color-scheme: dark){
+    /* Force truly white text in dark mode for the toggle and its contents */
+    #yt-minimal-topbar-toggle,
+    #yt-minimal-topbar-toggle *{
+        color: #ffffff !important;
+    }
+
+    #yt-minimal-topbar-toggle{
+        background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)) !important;
+        border:1px solid rgba(255,255,255,0.04) !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.55) !important;
+    }
+
+    #yt-minimal-topbar-toggle[data-state='on']{
+        background: linear-gradient(180deg, rgba(30,167,255,0.12), rgba(30,167,255,0.06)) !important;
+        border: 1px solid rgba(30,167,255,0.22) !important;
+    }
+}
+
+@media (prefers-color-scheme: light){
+    #yt-minimal-topbar-toggle{
+        color: #000000 !important;
+        background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.95)) !important;
+        border:1px solid rgba(16,22,26,0.06) !important;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+    }
+    #yt-minimal-topbar-toggle[data-state='on']{
+        background: linear-gradient(180deg, rgba(30,167,255,0.14), rgba(30,167,255,0.10)) !important;
+        border: 1px solid rgba(30,167,255,0.20) !important;
+        box-shadow: 0 10px 30px rgba(30,167,255,0.06), 0 4px 14px rgba(0,0,0,0.06) !important;
+    }
+}
