@@ -7,7 +7,7 @@ YouTube Ultra Productivity is a high-performance browser extension designed for 
 ---
 
 ![Hero Screenshot](screenshots/1.png)
-*Figure 1: The new navigation bar featuring the Intent Queue, Mode Selector, and the Learning Suite panel.*
+*Figure 1: The revamped V3 homepage featuring the Intent Queue and integrated navigation.*
 
 ---
 
@@ -27,29 +27,28 @@ A persistent side panel that turns every video into a workbench.
 
 - **Timestamped Notes**: Quick-capture insights tied to the specific second of the video.
 - **Visual Sketchpad**: Draw diagrams, mind maps, or equations directly on the player.
-- **Session Progress**: Real-time tracking of your mastery percentage.
-- **Focus Indicator**: No more guessing if you're in high-focus mode.
+- **Course Materials (NEW)**: Bind PDF textbooks or study guides to specific videos for side-by-side learning.
+- **Session Progress**: Real-time tracking of your mastery percentage with a sleek cyan glow.
 
-![Learning Suite](screenshots/1.png)
+![Learning Panel](screenshots/1.png)
 
 ### 3. Aggressive Focus Protection
 We don't just hide distractions; we hunt them down.
 
-- **Shortcut Lockdown**: Aggressively blocks all distracting YouTube keyboard shortcuts (like the mini-player 'i' shortcut) to keep you in the frame.
+- **Shortcut Lockdown**: Blocks all distracting YouTube keyboard shortcuts (like the mini-player 'i' or 'f') to keep you focused.
+- **Premium Glassmorphic UI**: High-fidelity blurs and cyan-blue gradients reduce eye strain and look stunning.
 - **The Shroud**: Positions the player centrally and dims the peripheral UI to eliminate side-eye distractions.
-- **Exit Reflections**: If you pause or leave a session early, the extension asks for your "Intention," forcing a moment of mindfulness before you drift away.
-
-![Focus Protection](screenshots/1.png)
+- **Exit Reflections**: If you pause or leave a session early, the extension asks for your "Intention," forcing a moment of mindfulness.
 
 ### 4. Advanced Analytics Dashboard
 A standalone command center for your learning history.
 
-- **History Management**: Track completed vs. in-progress sessions with Red/Green status indicators.
-- **Local Data Graphs**: Privacy-respecting SVG visualizations of your most-watched channels and note-taking density.
+- **History Management**: Track completed vs. in-progress sessions with Red/Cyan status indicators.
+- **PDF Resource Manager**: Manage all your linked study materials in one place.
 - **"Finish What You Started"**: Incomplete videos cannot be removed from history, enforcing learning discipline.
 
 ![Analytics Dashboard](screenshots/2.png)
-*Figure 2: The full Analytics Dashboard showing learning history, completion status, and visual insights.*
+*Figure 2: The updated Analytics Dashboard featuring the new premium UI and material management.*
 
 ### 5. Privacy-First & Local-First
 Your data is yours. No clouds, no servers, no tracking.
@@ -92,6 +91,7 @@ This extension uses `chrome.storage.local`. All your notes, sketches, and watch 
 ---
 
 ![Popup UI](screenshots/1.png)
+*Figure 3: The new glassmorphic Popup UI for quick mode switching.*
 
 ---
 
