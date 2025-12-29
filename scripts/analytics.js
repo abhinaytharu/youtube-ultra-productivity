@@ -11,14 +11,20 @@ class AnalyticsManager {
     }
 
     async init() {
-        await this.loadData();
+        try {
+            await this.loadData();
+        } catch (e) {
+            console.error("Dashboard data load failed", e);
+        }
         this.setupNavigation();
         this.setupListeners();
     }
 
 
     async loadData() {
-        const videos = await this.db.getAllVideos();
+        let videos = await this.db.getAllVideos();
+        if (!Array.isArray(videos)) videos = [];
+
         const mastered = videos.filter(v => v.status === 'completed').length;
         const totalMasteryEl = document.getElementById('total-mastery');
         if (totalMasteryEl) totalMasteryEl.textContent = `${mastered} Sessions Mastered`;
@@ -68,7 +74,7 @@ class AnalyticsManager {
                     <div class="item-actions">
                         <button class="btn-icon expand-btn">Expand</button>
                         <button class="btn-icon resume-btn" data-id="${v.videoId}" data-time="${v.lastTime || 0}">Resume</button>
-                        ${isCompleted ? `<button class="btn-icon btn-danger delete-btn" data-id="${v.videoId}">Remove</button>` : ''}
+                        ${(isCompleted || (v.progress || 0) > 90) ? `<button class="btn-icon btn-danger delete-btn" data-id="${v.videoId}">Remove</button>` : ''}
                     </div>
                 </div>
                 <div class="item-details">
@@ -113,11 +119,11 @@ class AnalyticsManager {
                 setTimeout(() => btn.textContent = 'Copy Text', 2000);
             };
 
-            // Delete Logic (only for completed)
+            // Delete Logic (only for completed or 90%+)
             const deleteBtn = item.querySelector('.delete-btn');
             if (deleteBtn) {
                 deleteBtn.onclick = async () => {
-                    if (confirm('Permanently remove this completed session from history?')) {
+                    if (confirm('Permanently remove this learning session from history?')) {
                         await this.db.deleteVideo(v.videoId);
                         this.loadData();
                     }
@@ -137,7 +143,7 @@ class AnalyticsManager {
         const container = document.getElementById('global-notes-list');
         container.innerHTML = '';
 
-        const videosWithNotes = videos.filter(v => v.notes && v.notes.trim() !== '');
+        const videosWithNotes = videos.filter(v => v.notes && typeof v.notes === 'string' && v.notes.trim() !== '');
 
         if (videosWithNotes.length === 0) {
             container.innerHTML = '<p style="color:#555; grid-column:1/-1; text-align:center; padding:40px;">No notes found in any session.</p>';
@@ -219,7 +225,8 @@ class AnalyticsManager {
         videos.forEach(v => {
             const opt = document.createElement('option');
             opt.value = v.videoId;
-            opt.textContent = `${v.title.substring(0, 50)}... (${v.channel})`;
+            const safeTitle = (v.title || 'Untitled Video').substring(0, 50);
+            opt.textContent = `${safeTitle}... (${v.channel || 'Unknown'})`;
             selector.appendChild(opt);
         });
         selector.value = currentVal;
@@ -317,6 +324,24 @@ class AnalyticsManager {
 
     setupListeners() {
         document.getElementById('refresh-btn').onclick = () => this.loadData();
+
+        document.getElementById('cleanup-btn').onclick = async () => {
+            const videos = await this.db.getAllVideos();
+            const toRemove = videos.filter(v => (v.progress || 0) > 90);
+
+            if (toRemove.length === 0) {
+                alert("No videos found with over 90% progress.");
+                return;
+            }
+
+            if (confirm(`Remove ${toRemove.length} video(s) that are over 90% watched?`)) {
+                for (const v of toRemove) {
+                    await this.db.deleteVideo(v.videoId);
+                }
+                alert("Cleanup complete.");
+                this.loadData();
+            }
+        };
 
         // Data Management
         document.getElementById('export-btn').onclick = () => this.db.exportData();

@@ -223,10 +223,16 @@
     syncLayout() {
       const masthead = document.querySelector('ytd-masthead');
       const sidePanel = this.shadowRoot.getElementById('ultra-side-panel');
+      const dash = document.getElementById('ultra-monk-dashboard');
+      const mh = masthead ? masthead.offsetHeight : 56;
+
       if (sidePanel) {
-        const mh = masthead ? masthead.offsetHeight : 56;
         sidePanel.style.top = `${mh}px`;
         sidePanel.style.height = `calc(100vh - ${mh}px)`;
+      }
+      if (dash) {
+        dash.style.top = `${mh}px`;
+        dash.style.height = `calc(100vh - ${mh}px)`;
       }
     }
 
@@ -641,7 +647,16 @@
         }
         #ultra-status-pill:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.2); }
 
-        .status-dot { width: 10px; height: 10px; background: #00f2fe; border-radius: 50%; box-shadow: 0 0 15px #00f2fe; }
+        .status-dot { 
+          width: 10px; height: 10px; background: #00f2fe; border-radius: 50%; 
+          box-shadow: 0 0 15px #00f2fe; 
+          animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+          0% { box-shadow: 0 0 8px rgba(0, 242, 254, 0.6); }
+          50% { box-shadow: 0 0 20px rgba(0, 242, 254, 1); }
+          100% { box-shadow: 0 0 8px rgba(0, 242, 254, 0.6); }
+        }
 
         #ultra-side-panel { 
           position: fixed; right: calc(-1 * var(--ultra-panel-width) - 20px); top: 10px; 
@@ -681,10 +696,10 @@
           transition: all 0.3s;
         }
         .ultra-tab.active { 
-          background: rgba(255,255,255,0.05);
-          color: #fff; 
-          border-bottom: none;
-          box-shadow: inset 0 0 10px rgba(255,255,255,0.02);
+          background: rgba(0, 242, 254, 0.1);
+          color: var(--ultra-accent); 
+          box-shadow: inset 0 0 10px rgba(0, 242, 254, 0.1);
+          border: 1px solid rgba(0, 242, 254, 0.2);
         }
 
         .ultra-content { flex: 1; overflow-y: auto; padding: 28px; color: #fff; scrollbar-width: none; }
@@ -744,11 +759,13 @@
 
         #ultra-sketchpad-container { 
           width: 100%; height: 400px; 
-          background: #fff; 
+          background: #fcfcfc; 
           border-radius: 20px; 
           margin-bottom: 20px; 
-          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          box-shadow: inset 0 8px 32px rgba(0,0,0,0.1), 0 10px 30px rgba(0,0,0,0.3);
           overflow: hidden;
+          background-image: radial-gradient(#ddd 1px, transparent 1px);
+          background-size: 20px 20px;
         }
         
         #ultra-exit-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.92); z-index: 2147483647; display: none; justify-content: center; align-items: center; backdrop-filter: blur(10px); }

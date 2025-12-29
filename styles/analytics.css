@@ -81,6 +81,7 @@ body {
 }
 
 .nav-item {
+    width: 100%;
     background: transparent;
     border: none;
     color: var(--text-secondary);
@@ -105,7 +106,8 @@ body {
 .nav-item.active {
     background: var(--accent-gradient);
     color: #000;
-    box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 242, 254, 0.3);
+    transform: translateX(8px);
 }
 
 .sidebar-footer {
@@ -230,10 +232,10 @@ body {
 }
 
 .history-item:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    background: rgba(35, 35, 45, 0.7);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    border-color: rgba(0, 242, 254, 0.2);
+    background: rgba(30, 30, 40, 0.7);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 .item-main {
@@ -257,6 +259,7 @@ body {
 
 .item-info .title:hover {
     color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
 }
 
 .item-info .channel {
@@ -318,6 +321,7 @@ body {
 .item-details.expanded {
     padding: 30px;
     max-height: 2000px;
+    background: rgba(255, 255, 255, 0.01);
 }
 
 .details-grid {
