@@ -3,34 +3,122 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Pop Up For Extension</title>
+    <title>YouTube Ultra Productivity</title>
     <style>
-        body {
-            width: 200px;
-            height: 100px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Fira Code, Arial, sans-serif;
-            background-color: rgb(48, 48, 48);
-            margin: 0;
-           padding: 12px;
+        :root {
+            --bg: #050505;
+            --surface: #121212;
+            --accent: #ffffff;
+            --text: #e0e0e0;
+            --text-dim: #717171;
+            --border: #2a2a2a;
         }
 
-        .main-body {
-            background-color: rgb(44, 44, 44);
-            padding: 12px;
-            text-align: center;
-            font-size: 14px;
-            color: #dadada;
+        body {
+            width: 320px;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            margin: 0;
+            padding: 24px;
+        }
+
+        .header {
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+        }
+
+        .header h1 {
+            font-size: 20px;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .mode-selector {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .mode-option {
+            background: var(--surface);
+            padding: 16px;
             border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-option:hover {
+            border-color: var(--text-dim);
+        }
+
+        .mode-option.active {
+            border-color: var(--accent);
+            background: #1a1a1a;
+        }
+
+        .mode-name {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .mode-desc {
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        .footer {
+            margin-top: 24px;
+            font-size: 11px;
+            color: var(--text-dim);
+            text-align: center;
+        }
+
+        .stats-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
+    <div class="header">
+        <h1>Ultra Productivity</h1>
+    </div>
 
-    <p class="main-body">Toggle the Button on Top Right To Enable and Disable</p>
+    <div class="mode-selector">
+        <div class="mode-option" data-mode="monk">
+            <span class="mode-name">Monk Mode</span>
+            <span class="mode-desc">Single-video focus, no feed, no search results. Maximum friction.</span>
+        </div>
+        <div class="mode-option" data-mode="study">
+            <span class="mode-name">Study Mode</span>
+            <span class="mode-desc">No recommendations or comments. Search allowed. Focus on learning.</span>
+        </div>
+        <div class="mode-option" data-mode="casual">
+            <span class="mode-name">Casual Mode</span>
+            <span class="mode-desc">Standard YouTube with Ultra Tools panel enabled.</span>
+        </div>
+    </div>
+
+    <button class="stats-btn">View Local Analytics</button>
+
+    <div class="footer">
+        Data is stored locally. No tracking. No pings.
+    </div>
+
+    <script src="scripts/popup.js"></script>
 </body>
 
 </html>

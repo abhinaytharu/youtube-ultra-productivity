@@ -1,22 +1,28 @@
-# YouTube Minimal — Fresh Build
+# YouTube Productivity — Minimalist & Notes
 
-A clean MV3 extension that applies a glassmorphism redesign to YouTube while preserving native player controls and proper fullscreen.
+A modern, distraction-free YouTube extension designed for productivity. It cleans up the interface and provides a powerful note-taking system linked to video timestamps.
 
-How to load (Chrome/Edge):
-1. Open `chrome://extensions` (or `edge://extensions`).
-2. Enable Developer Mode.
-3. Click Load unpacked and select this folder.
-4. Open a YouTube tab and refresh.
+## Features
 
-Files:
-- `manifest.json` — MV3 manifest
-- `scripts/content.js` — SPA-aware enabler that turns the theme on
-- `styles/content.css` — glass theme (no overlays on the video)
-- `icons/` — placeholder icons (replace as you wish)
+- **🚀 Productivity Mode**: Hides home feed recommendations and related videos to keep you focused.
+- **📝 Timestamped Notes**: Take notes while watching. Each note is saved with the current video time.
+- **🎯 One-Click Jump**: Click on a note's timestamp to jump exactly to that moment in the video.
+- **✨ Minimalist Design**: Replaces standard YouTube clutter with a clean, modern dark interface.
+- **💾 Auto-Save**: All notes are saved locally in your browser storage.
+- **⌨️ Shortcuts**: Press `Alt + N` at any time on a watch page to toggle the Notes panel.
 
-Customize:
-- Edit colors/radii/shadows in `styles/content.css`.
+## Installation (Chrome/Edge)
 
-License: MIT
+1. Open `chrome://extensions`.
+2. Enable **Developer Mode**.
+3. Click **Load unpacked** and select this project folder.
+4. Open a YouTube video and look for the **Productivity** toggle in the top-right masthead.
 
+## Usage
 
+- **Toggle Mode**: Control the minimalist theme via the button in the YouTube header.
+- **Take Notes**: Click **📝 Open Video Notes** or press `Alt + N` to open the sidebar.
+- **Manage Data**: Notes are stored per video ID, making them easy to revisit later.
+
+## License
+MIT

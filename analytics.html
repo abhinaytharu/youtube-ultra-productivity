@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Analytics Dashboard - Ultra Productivity</title>
+    <link rel="stylesheet" href="styles/analytics.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Ultra Analytics</h2>
+                <p>Learning Insights</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="history">Learning History</button>
+                <button class="nav-item" data-section="notes">Global Notes</button>
+                <button class="nav-item" data-section="stats">Insights & Graphs</button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="refresh-btn" class="btn btn-secondary">Refresh UI</button>
+                <div style="margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                    <button id="export-btn" class="btn btn-secondary" style="font-size: 11px;">Export JSON</button>
+                    <button id="import-btn" class="btn btn-secondary" style="font-size: 11px;">Import JSON</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            <!-- Learning History Section -->
+            <section id="section-history" class="content-section active">
+                <header class="section-header">
+                    <h1>Learning History</h1>
+                    <div class="history-summary">
+                        <div class="stat-pill"><span class="dot dot-green"></span> Completed</div>
+                        <div class="stat-pill"><span class="dot dot-red"></span> Incomplete</div>
+                    </div>
+                </header>
+
+                <div class="history-container">
+                    <div id="history-list" class="history-list">
+                        <!-- History items will be injected here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Global Notes Section -->
+            <section id="section-notes" class="content-section">
+                <header class="section-header">
+                    <h1>Manage Global Notes</h1>
+                </header>
+                <div id="global-notes-list" class="notes-grid">
+                    <!-- Global notes will be injected here -->
+                </div>
+            </section>
+
+            <!-- Insights Section -->
+            <section id="section-stats" class="content-section">
+                <header class="section-header">
+                    <h1>Learning Insights</h1>
+                </header>
+                <div class="stats-grid">
+                    <div class="card">
+                        <h3>Most Watched Channels</h3>
+                        <div id="channel-graph" class="chart-container"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Detailed Note Density</h3>
+                        <div id="note-density-graph" class="chart-container"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">Details</h2>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="scripts/storage.js"></script>
+    <script src="scripts/analytics.js"></script>
+</body>
+
+</html>

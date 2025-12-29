@@ -1,31 +1,55 @@
 {
   "manifest_version": 3,
-  "name": "YouTube Minimal — Glass Rebuild",
-  "version": "1.0.0",
-  "description": "Clean glassmorphism redesign for YouTube with native controls and true fullscreen.",
+  "name": "YouTube Ultra Productivity — Deep Work",
+  "version": "3.0.0",
+  "description": "The ultimate intentional learning tool for YouTube. Single-video lock, exit reflections, and a deep-learning side panel.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
-  "host_permissions": ["*://*.youtube.com/*"],
+  "host_permissions": [
+    "*://*.youtube.com/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["*://*.youtube.com/*"],
-      "js": ["scripts/content.js"],
-      "css": ["styles/content.css"],
-      "run_at": "document_end"
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "scripts/storage.js",
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "run_at": "document_start"
     }
   ],
-  
-  "action": {   
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
     "default_popup": "popup.html",
-      "default_icon": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
-      }
-    }  
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/icon128.png",
+        "analytics.html"
+      ],
+      "matches": [
+        "*://*.youtube.com/*"
+      ]
+    }
+  ]
 }
-
-
