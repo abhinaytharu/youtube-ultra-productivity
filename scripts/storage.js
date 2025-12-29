@@ -7,7 +7,8 @@ window.UltraStorage = {
     KEYS: {
         HISTORY: 'ultra_history',
         SETTINGS: 'ultra_settings',
-        SKETCHES: 'ultra_sketches'
+        SKETCHES: 'ultra_sketches',
+        PDFS: 'ultra_pdfs'
     },
 
     // --- Base Operations ---
@@ -31,17 +32,24 @@ window.UltraStorage = {
         return history.find(v => v.videoId === videoId) || { videoId, notes: '', progress: 0, status: 'in-progress' };
     },
 
+    _lock: false,
     async setVideoData(videoId, updates) {
-        const history = await this.get(this.KEYS.HISTORY, []);
-        const index = history.findIndex(v => v.videoId === videoId);
+        while (this._lock) await new Promise(r => setTimeout(r, 50));
+        this._lock = true;
+        try {
+            const history = await this.get(this.KEYS.HISTORY, []);
+            const index = history.findIndex(v => v.videoId === videoId);
 
-        if (index !== -1) {
-            history[index] = { ...history[index], ...updates, updatedAt: Date.now() };
-        } else {
-            history.push({ videoId, notes: '', status: 'in-progress', ...updates, updatedAt: Date.now() });
+            if (index !== -1) {
+                history[index] = { ...history[index], ...updates, updatedAt: Date.now() };
+            } else {
+                history.push({ videoId, notes: '', status: 'in-progress', ...updates, updatedAt: Date.now() });
+            }
+
+            await this.set(this.KEYS.HISTORY, history);
+        } finally {
+            this._lock = false;
         }
-
-        await this.set(this.KEYS.HISTORY, history);
     },
 
     async getAllVideos() {
@@ -53,10 +61,36 @@ window.UltraStorage = {
         history = history.filter(v => v.videoId !== videoId);
         await this.set(this.KEYS.HISTORY, history);
 
-        // Also cleanup sketches
+        // Also cleanup sketches and PDFs
         const sketches = await this.get(this.KEYS.SKETCHES, {});
         delete sketches[videoId];
         await this.set(this.KEYS.SKETCHES, sketches);
+
+        const pdfs = await this.get(this.KEYS.PDFS, {});
+        delete pdfs[videoId];
+        await this.set(this.KEYS.PDFS, pdfs);
+    },
+
+    // --- PDF Management ---
+    async getPDF(videoId) {
+        const pdfs = await this.get(this.KEYS.PDFS, {});
+        return pdfs[videoId] || null;
+    },
+
+    async setPDF(videoId, data) {
+        while (this._lock) await new Promise(r => setTimeout(r, 50));
+        this._lock = true;
+        try {
+            const pdfs = await this.get(this.KEYS.PDFS, {});
+            pdfs[videoId] = data;
+            await this.set(this.KEYS.PDFS, pdfs);
+        } finally {
+            this._lock = false;
+        }
+    },
+
+    async getAllPDFs() {
+        return await this.get(this.KEYS.PDFS, {});
     },
 
     // --- Settings ---

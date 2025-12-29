@@ -19,14 +19,29 @@ class AnalyticsManager {
 
     async loadData() {
         const videos = await this.db.getAllVideos();
+        const mastered = videos.filter(v => v.status === 'completed').length;
+        const totalMasteryEl = document.getElementById('total-mastery');
+        if (totalMasteryEl) totalMasteryEl.textContent = `${mastered} Sessions Mastered`;
+
         this.renderHistory(videos);
         this.renderGlobalNotes(videos);
+        this.renderMaterials(videos);
         this.renderInsights(videos);
+        this.populateVideoSelector(videos);
     }
 
     renderHistory(videos) {
         const list = document.getElementById('history-list');
         list.innerHTML = '';
+
+        if (videos.length === 0) {
+            list.innerHTML = `
+                <div class="card" style="text-align:center; padding: 60px;">
+                    <p style="color:var(--text-secondary);">No learning sessions recorded yet. Start watching a video to build your history.</p>
+                </div>
+            `;
+            return;
+        }
 
         videos.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
 
@@ -59,7 +74,10 @@ class AnalyticsManager {
                 <div class="item-details">
                     <div class="details-grid">
                         <div class="detail-section">
-                            <h4>Session Notes</h4>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <h4>Session Notes</h4>
+                                <button class="btn-icon copy-note-btn" data-id="${v.videoId}">Copy Text</button>
+                            </div>
                             <div class="notes-preview">${v.notes || 'No notes taken.'}</div>
                         </div>
                         <div class="detail-section">
@@ -85,6 +103,14 @@ class AnalyticsManager {
             item.querySelector('.resume-btn').onclick = () => {
                 const time = item.querySelector('.resume-btn').dataset.time;
                 window.open(`https://www.youtube.com/watch?v=${v.videoId}&t=${time}`, '_blank');
+            };
+
+            // Copy Logic
+            item.querySelector('.copy-note-btn').onclick = () => {
+                navigator.clipboard.writeText(v.notes || '');
+                const btn = item.querySelector('.copy-note-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy Text', 2000);
             };
 
             // Delete Logic (only for completed)
@@ -129,11 +155,11 @@ class AnalyticsManager {
                     </div>
                     <button class="btn-icon btn-danger delete-note-btn" data-id="${v.videoId}">Delete Note</button>
                 </div>
-                <div class="notes-preview" style="background:#0a0a0a; border:none; height:150px;">${v.notes}</div>
+                <div class="notes-preview" style="background:#0a0a0a; border:none; height:150px; overflow-y:auto; padding:10px; font-size:13px; border-radius:8px;">${v.notes}</div>
             `;
 
             card.querySelector('.delete-note-btn').onclick = async () => {
-                if (confirm('Are you sure you want to delete ONLY the notes for this session? This action is irreversible.')) {
+                if (confirm('Are you sure you want to delete ONLY the notes for this session?')) {
                     await this.db.setVideoData(v.videoId, { notes: "" });
                     this.loadData();
                 }
@@ -141,6 +167,62 @@ class AnalyticsManager {
 
             container.appendChild(card);
         });
+    }
+
+    async renderMaterials(videos) {
+        const container = document.getElementById('materials-list');
+        container.innerHTML = '';
+
+        const pdfs = await this.db.getAllPDFs();
+        const videoIds = Object.keys(pdfs);
+
+        if (videoIds.length === 0) {
+            container.innerHTML = '<p style="color:#555; grid-column:1/-1; text-align:center; padding:40px;">No course materials linked yet.</p>';
+            return;
+        }
+
+        videoIds.forEach(id => {
+            const v = videos.find(vid => vid.videoId === id) || { title: 'Unknown Video', channel: 'Unknown Channel' };
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
+                    <div>
+                        <h4 style="font-size:14px; margin-bottom:4px;">${v.title}</h4>
+                        <p style="font-size:11px; color:var(--text-secondary);">${v.channel}</p>
+                    </div>
+                    <button class="btn-icon btn-danger delete-pdf-btn" data-id="${id}">Remove PDF</button>
+                </div>
+                <div class="stat-pill" style="justify-content:center; cursor:pointer; background:rgba(255,255,255,0.05);" onclick="window.open('${pdfs[id]}')">
+                    Open Linked PDF
+                </div>
+            `;
+
+            card.querySelector('.delete-pdf-btn').onclick = async () => {
+                if (confirm('Are you sure you want to remove this PDF link?')) {
+                    const allPdfs = await this.db.get(this.db.KEYS.PDFS, {});
+                    delete allPdfs[id];
+                    await this.db.set(this.db.KEYS.PDFS, allPdfs);
+                    this.loadData();
+                }
+            };
+
+            container.appendChild(card);
+        });
+    }
+
+    populateVideoSelector(videos) {
+        const selector = document.getElementById('video-selector');
+        const currentVal = selector.value;
+        selector.innerHTML = '<option value="">Select a video to bind...</option>';
+
+        videos.forEach(v => {
+            const opt = document.createElement('option');
+            opt.value = v.videoId;
+            opt.textContent = `${v.title.substring(0, 50)}... (${v.channel})`;
+            selector.appendChild(opt);
+        });
+        selector.value = currentVal;
     }
 
     renderInsights(videos) {
@@ -166,8 +248,8 @@ class AnalyticsManager {
             html += `
                 <div style="display:flex; align-items:center; gap:12px;">
                     <div style="width:100px; font-size:11px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${name}</div>
-                    <div style="flex:1; background:#222; height:14px; border-radius:7px; overflow:hidden;">
-                        <div style="width:${width}%; background:var(--accent-color); height:100%;"></div>
+                    <div style="flex:1; background:rgba(255,255,255,0.05); height:12px; border-radius:6px; overflow:hidden;">
+                        <div style="width:${width}%; background:var(--accent-gradient); height:100%; box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);"></div>
                     </div>
                     <div style="width:60px; font-size:11px; color:#fff;">${this.formatSeconds(val)}</div>
                 </div>
@@ -198,9 +280,9 @@ class AnalyticsManager {
         noteDensity.forEach(d => {
             const height = (d.count / maxVal) * 150;
             html += `
-                <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:8px;">
-                    <div style="width:30px; height:${height}px; background:#fff; border-radius:4px 4px 0 0; position:relative;">
-                        <span style="position:absolute; top:-20px; font-size:10px; color:#fff; width:100%; text-align:center;">${d.count}</span>
+                <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:12px;">
+                    <div style="width:32px; height:${height}px; background:var(--accent-gradient); border-radius:6px 6px 0 0; position:relative; box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);">
+                        <span style="position:absolute; top:-22px; font-size:10px; color:var(--accent-color); font-weight:700; width:100%; text-align:center;">${d.count}</span>
                     </div>
                     <div style="font-size:10px; color:var(--text-secondary); width:60px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${d.title}</div>
                 </div>
@@ -263,6 +345,48 @@ class AnalyticsManager {
         const modal = document.getElementById('detail-modal');
         document.querySelector('.close-btn').onclick = () => modal.style.display = 'none';
         window.onclick = (e) => { if (e.target == modal) modal.style.display = 'none'; };
+
+        // PDF Upload Logic
+        const uploadTrigger = document.getElementById('upload-trigger-btn');
+        const fileInput = document.getElementById('pdf-upload');
+        const saveBtn = document.getElementById('save-resource-btn');
+        const videoSelector = document.getElementById('video-selector');
+        const preview = document.getElementById('upload-preview');
+        const fileName = document.getElementById('selected-file-name');
+
+        uploadTrigger.onclick = () => fileInput.click();
+
+        fileInput.onchange = (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                if (file.type !== 'application/pdf') {
+                    alert('Please select a valid PDF file.');
+                    return;
+                }
+                fileName.textContent = `Selected: ${file.name}`;
+                preview.style.display = 'block';
+            }
+        };
+
+        saveBtn.onclick = async () => {
+            const videoId = videoSelector.value;
+            if (!videoId) {
+                alert('Please select a video session to bind this PDF to.');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                const base64 = event.target.result;
+                await this.db.setPDF(videoId, base64);
+                alert('PDF linked successfully!');
+                preview.style.display = 'none';
+                fileInput.value = '';
+                this.loadData();
+            };
+            reader.readAsDataURL(file);
+        };
     }
 }
 

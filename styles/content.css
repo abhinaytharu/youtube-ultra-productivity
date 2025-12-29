@@ -3,6 +3,25 @@
  * Version 3.2.0 - Expanded interactions
  */
 
+:root {
+  --accent-color: #3ea6ff;
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --success-color: #00f2fe;
+  --danger-color: #f75c7e;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* --- THE SHROUD: Locking Video Session --- */
 [data-ultra-lock="on"] #related,
 [data-ultra-lock="on"] #comments,
@@ -29,158 +48,230 @@
   opacity: 1;
 }
 
-/* --- MONK MODE: Minimalist Homepage --- */
+/* --- MONK/STUDY MODE: Minimalist Homepage --- */
 [data-ultra-mode="monk"] ytd-browse[page-subtype="home"] #contents,
-[data-ultra-mode="monk"] ytd-browse[page-subtype="home"] ytd-rich-grid-renderer {
+[data-ultra-mode="monk"] ytd-rich-grid-renderer,
+[data-ultra-mode="study"] ytd-browse[page-subtype="home"] #contents,
+[data-ultra-mode="study"] ytd-rich-grid-renderer,
+[data-ultra-mode="monk"] #guide,
+[data-ultra-mode="study"] #guide,
+[data-ultra-mode="monk"] ytd-feed-filter-chip-bar-renderer,
+[data-ultra-mode="study"] ytd-feed-filter-chip-bar-renderer,
+[data-ultra-mode="monk"] ytd-mini-guide-renderer,
+[data-ultra-mode="study"] ytd-mini-guide-renderer {
   display: none !important;
 }
 
+/* Force ytd-browse to be full width when dashboard is active */
+[data-ultra-mode="monk"] ytd-browse[page-subtype="home"],
+[data-ultra-mode="study"] ytd-browse[page-subtype="home"] {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
 #ultra-monk-dashboard {
-  background: #000;
+  display: none;
+  background: #030303;
   min-height: 100vh;
-  padding: 60px 5%;
+  width: 100vw;
+  padding: 120px 10%;
   font-family: 'Inter', sans-serif;
   color: #fff;
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(79, 172, 254, 0.05) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.05) 0%, transparent 40%);
+}
+
+[data-ultra-mode="monk"] #ultra-monk-dashboard,
+[data-ultra-mode="study"] #ultra-monk-dashboard {
+  display: block !important;
+}
+
+.dash-container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .dash-container h1 {
-  font-size: 42px;
+  background: var(--accent-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 56px;
   font-weight: 800;
-  letter-spacing: -1.5px;
-  margin-bottom: 40px;
+  letter-spacing: -3px;
+  margin-bottom: 10px;
 }
 
 .dash-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 32px;
+  width: 100%;
+  margin-top: 60px;
 }
 
 .dash-card {
-  background: #111;
-  border: 1px solid #222;
-  padding: 24px;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 32px;
+  border-radius: 24px;
   cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .dash-card:hover {
-  transform: translateY(-4px);
-  border-color: #3ea6ff;
-  box-shadow: 0 10px 30px rgba(62, 166, 255, 0.1);
+  transform: translateY(-8px);
+  border-color: rgba(0, 242, 254, 0.3);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
 .dash-card .id {
-  display: block;
-  font-size: 11px;
+  display: inline-block;
+  font-size: 10px;
   text-transform: uppercase;
-  color: #3ea6ff;
-  margin-bottom: 8px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  color: var(--accent-color);
+  margin-bottom: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  background: rgba(0, 242, 254, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
 }
 
 .dash-card .title-stub {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 12px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  margin-bottom: 16px;
   line-height: 1.4;
+  letter-spacing: -0.5px;
 }
 
-.dash-card .prog {
-  font-weight: 800;
-  font-size: 14px;
-  color: #aaa;
-  margin-top: auto;
-}
-
-.dash-card p {
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: 13px;
-  line-height: 1.6;
-  color: #666;
-  margin: 12px 0 0;
-  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  font-weight: 600;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot-green {
+  background: #00f2fe;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+}
+
+.dot-red {
+  background: #f75c7e;
+  box-shadow: 0 0 15px rgba(247, 92, 126, 0.6);
 }
 
 /* --- RESPONSIBILITY: Side Panel Open State --- */
 body.ultra-panel-open ytd-watch-flexy[flexy] {
-  padding-right: 420px !important;
+  padding-right: 440px !important;
   transition: padding-right 0.3s ease;
-}
-
-/* --- GLOBAL UI FIXES --- */
-/* Ensure extension button on watch page looks native but distinct */
-#ultra-open-panel-btn {
-  background: #fff;
-  color: #000;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 13px;
-  cursor: pointer;
-  margin-top: 15px;
-  transition: background 0.2s;
-}
-
-#ultra-open-panel-btn:hover {
-  background: #e0e0e0;
-}
-
-/* Hide ambient mode shadows which bleed into our panel */
-[data-ultra-lock="on"] #cinematic-container {
-  display: none !important;
 }
 
 /* --- NAVBAR BUTTONS --- */
 #ultra-navbar-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-right: 16px;
-  margin-left: 8px;
-  height: 40px;
+  gap: 10px;
+  margin-right: 20px;
+  margin-left: 10px;
 }
 
 .ultra-nav-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff !important;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8) !important;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 6px 14px;
-  border-radius: 18px;
+  padding: 8px 16px;
+  border-radius: 12px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
-  font-family: inherit;
 }
 
 .ultra-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff !important;
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .ultra-nav-btn.mode-monk {
-  border-color: #ff4d4d;
-  color: #ff4d4d !important;
+  border-color: rgba(247, 92, 126, 0.4);
+  color: #f75c7e !important;
 }
 
 .ultra-nav-btn.mode-study {
-  border-color: #3ea6ff;
-  color: #3ea6ff !important;
+  border-color: rgba(0, 242, 254, 0.4);
+  color: #00f2fe !important;
 }
 
-.ultra-nav-btn.mode-casual {
-  border-color: #aaa;
-  color: #aaa !important;
+/* Learning Analytics Button Specific */
+#ultra-nav-analytics {
+  background: var(--accent-gradient);
+  color: #000 !important;
+  border: none;
+  font-weight: 800;
+}
+
+#ultra-nav-analytics:hover {
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+}
+
+/* --- GLOBAL UI FIXES --- */
+#ultra-open-panel-btn {
+  background: var(--accent-gradient);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#ultra-open-panel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 242, 254, 0.4);
 }

@@ -21,6 +21,7 @@
             <nav class="sidebar-nav">
                 <button class="nav-item active" data-section="history">Learning History</button>
                 <button class="nav-item" data-section="notes">Global Notes</button>
+                <button class="nav-item" data-section="materials">Course Materials</button>
                 <button class="nav-item" data-section="stats">Insights & Graphs</button>
             </nav>
 
@@ -40,6 +41,9 @@
                 <header class="section-header">
                     <h1>Learning History</h1>
                     <div class="history-summary">
+                        <div id="total-mastery" class="stat-pill"
+                            style="border-color: var(--success-color); color: #fff; font-weight: 700;">0 Sessions
+                            Mastered</div>
                         <div class="stat-pill"><span class="dot dot-green"></span> Completed</div>
                         <div class="stat-pill"><span class="dot dot-red"></span> Incomplete</div>
                     </div>
@@ -59,6 +63,46 @@
                 </header>
                 <div id="global-notes-list" class="notes-grid">
                     <!-- Global notes will be injected here -->
+                </div>
+            </section>
+
+            <!-- Course Materials Section -->
+            <section id="section-materials" class="content-section">
+                <header class="section-header">
+                    <h1>Course Materials</h1>
+                </header>
+                <div class="materials-container">
+                    <div class="card" style="margin-bottom: 30px;">
+                        <h3>Upload New Resource</h3>
+                        <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 20px;">Attach PDF
+                            documents to your study sessions for quick reference.</p>
+
+                        <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                            <div class="select-wrapper">
+                                <select id="video-selector">
+                                    <option value="">Select a video to bind...</option>
+                                </select>
+                            </div>
+
+                            <input type="file" id="pdf-upload" accept=".pdf" style="display: none;">
+                            <button id="upload-trigger-btn" class="btn btn-secondary" style="width: 200px;">Choose PDF
+                                File</button>
+                        </div>
+
+                        <div id="upload-preview"
+                            style="display: none; margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.03); border-radius: 12px; border: 1px dashed var(--border-color);">
+                            <p id="selected-file-name"
+                                style="font-size: 14px; font-weight: 600; color: var(--accent-color);"></p>
+                            <button id="save-resource-btn" class="btn"
+                                style="margin-top: 15px; width: 100%; background: var(--accent-gradient); color: #000;">Bind
+                                PDF to Session</button>
+                        </div>
+                    </div>
+
+                    <h3>Linked Resources</h3>
+                    <div id="materials-list" class="notes-grid" style="margin-top: 20px;">
+                        <!-- PDF resources will be injected here -->
+                    </div>
                 </div>
             </section>
 
