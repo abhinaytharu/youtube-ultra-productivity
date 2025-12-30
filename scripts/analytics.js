@@ -54,12 +54,12 @@ class AnalyticsManager {
         videos.forEach(v => {
             const item = document.createElement('div');
             item.className = 'history-item';
-            const isCompleted = v.status === 'completed';
+            const isMastered = v.status === 'completed' || (v.progress || 0) >= 90;
 
             item.innerHTML = `
                 <div class="item-main">
                     <div class="item-status">
-                        <span class="dot ${isCompleted ? 'dot-green' : 'dot-red'}"></span>
+                        <span class="dot ${isMastered ? 'dot-green' : 'dot-red'}"></span>
                     </div>
                     <div class="item-info">
                         <span class="title" data-id="${v.videoId}">${v.title || 'Unknown Video'}</span>
@@ -74,7 +74,8 @@ class AnalyticsManager {
                     <div class="item-actions">
                         <button class="btn-icon expand-btn">Expand</button>
                         <button class="btn-icon resume-btn" data-id="${v.videoId}" data-time="${v.lastTime || 0}">Resume</button>
-                        ${(isCompleted || (v.progress || 0) > 90) ? `<button class="btn-icon btn-danger delete-btn" data-id="${v.videoId}">Remove</button>` : ''}
+                        <button class="btn-icon edit-btn" data-id="${v.videoId}">Edit</button>
+                        <button class="btn-icon btn-danger delete-btn" data-id="${v.videoId}">Remove</button>
                     </div>
                 </div>
                 <div class="item-details">
@@ -119,20 +120,22 @@ class AnalyticsManager {
                 setTimeout(() => btn.textContent = 'Copy Text', 2000);
             };
 
-            // Delete Logic (only for completed or 90%+)
-            const deleteBtn = item.querySelector('.delete-btn');
-            if (deleteBtn) {
-                deleteBtn.onclick = async () => {
-                    if (confirm('Permanently remove this learning session from history?')) {
-                        await this.db.deleteVideo(v.videoId);
-                        this.loadData();
-                    }
-                };
-            }
-
             // Title click to open
             item.querySelector('.title').onclick = () => {
                 window.open(`https://www.youtube.com/watch?v=${v.videoId}`, '_blank');
+            };
+
+            // Edit Logic
+            item.querySelector('.edit-btn').onclick = () => {
+                this.showEditModal(v);
+            };
+
+            // Delete Logic (Always available now)
+            item.querySelector('.delete-btn').onclick = async () => {
+                if (confirm('Permanently remove this learning session from history?')) {
+                    await this.db.deleteVideo(v.videoId);
+                    this.loadData();
+                }
             };
 
             list.appendChild(item);
@@ -297,6 +300,67 @@ class AnalyticsManager {
         });
         html += '</div>';
         container.innerHTML = html;
+    }
+
+    showEditModal(video) {
+        const modal = document.getElementById('detail-modal');
+        const title = document.getElementById('modal-title');
+        const body = document.getElementById('modal-body');
+
+        title.textContent = `Edit Session: ${video.title || 'Untitled'}`;
+        body.innerHTML = `
+            <div class="edit-form" style="display:flex; flex-direction:column; gap:20px;">
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:10px; font-weight:700; font-size:12px; text-transform:uppercase; color:var(--text-secondary);">Learning Status</label>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn ${video.status === 'completed' ? 'btn-active' : 'btn-secondary'} status-toggle" data-status="completed" style="flex:1;">Mastered</button>
+                        <button class="btn ${video.status !== 'completed' ? 'btn-active' : 'btn-secondary'} status-toggle" data-status="in-progress" style="flex:1;">In-Progress</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:10px; font-weight:700; font-size:12px; text-transform:uppercase; color:var(--text-secondary);">Progress Control (${video.progress || 0}%)</label>
+                    <input type="range" id="edit-progress" min="0" max="100" value="${video.progress || 0}" style="width:100%; accent-color:var(--accent-color);">
+                </div>
+
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:10px; font-weight:700; font-size:12px; text-transform:uppercase; color:var(--text-secondary);">Session Notes</label>
+                    <textarea id="edit-notes" style="width:100%; height:200px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; color:#fff; padding:15px; font-family:inherit; resize:vertical;">${video.notes || ''}</textarea>
+                </div>
+
+                <button id="save-edit-btn" class="btn" style="background:var(--accent-gradient); color:#000; font-weight:800; padding:15px; margin-top:10px;">Save Changes</button>
+            </div>
+        `;
+
+        modal.style.display = 'block';
+
+        let selectedStatus = video.status;
+        const statusBtns = body.querySelectorAll('.status-toggle');
+        statusBtns.forEach(btn => {
+            btn.onclick = () => {
+                selectedStatus = btn.dataset.status;
+                statusBtns.forEach(b => {
+                    b.classList.remove('btn-active');
+                    b.classList.add('btn-secondary');
+                });
+                btn.classList.add('btn-active');
+                btn.classList.remove('btn-secondary');
+            };
+        });
+
+        body.querySelector('#save-edit-btn').onclick = async () => {
+            const progress = parseInt(body.querySelector('#edit-progress').value);
+            const notes = body.querySelector('#edit-notes').value;
+
+            await this.db.setVideoData(video.videoId, {
+                status: selectedStatus,
+                progress: progress,
+                notes: notes
+            });
+
+            modal.style.display = 'none';
+            this.loadData();
+        };
     }
 
     formatSeconds(sec) {
