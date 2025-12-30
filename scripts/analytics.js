@@ -160,11 +160,11 @@ class AnalyticsManager {
                 <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:15px;">
                     <div>
                         <h4 style="font-size:14px; margin-bottom:4px;">${v.title}</h4>
-                        <p style="font-size:11px; color:var(--text-secondary);">${v.channel}</p>
+                        <p style="font-size:11px; color:var(--ultra-text-dim);">${v.channel}</p>
                     </div>
                     <button class="btn-icon btn-danger delete-note-btn" data-id="${v.videoId}">Delete Note</button>
                 </div>
-                <div class="notes-preview" style="background:#0a0a0a; border:none; height:150px; overflow-y:auto; padding:10px; font-size:13px; border-radius:8px;">${v.notes}</div>
+                <div class="notes-preview" style="background:var(--ultra-surface); color:var(--ultra-text-main); border:none; height:150px; overflow-y:auto; padding:10px; font-size:13px; border-radius:8px;">${v.notes}</div>
             `;
 
             card.querySelector('.delete-note-btn').onclick = async () => {

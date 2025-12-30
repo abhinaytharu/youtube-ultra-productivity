@@ -826,7 +826,7 @@
 
         #ultra-notes-editor { 
           width: 100%; height: 300px; 
-          background: var(--ultra-surface-hover); 
+          background: #1a1a1f; 
           border: 1px solid var(--ultra-border); 
           border-radius: 16px; 
           color: var(--ultra-text); 
@@ -839,7 +839,25 @@
           outline: none;
           transition: all 0.3s;
         }
-        #ultra-notes-editor:focus { border-color: var(--ultra-accent); background: var(--ultra-surface); box-shadow: var(--ultra-shadow); }
+        #ultra-notes-editor:focus { 
+          border-color: var(--ultra-accent); 
+          background: #0f0f14; 
+          box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.1);
+        }
+
+        @media (prefers-color-scheme: light) {
+          #ultra-notes-editor {
+            background: #ffffff;
+            color: #0f172a;
+            border-color: rgba(0, 0, 0, 0.15);
+          }
+          #ultra-notes-editor:focus {
+            background: #f8fafc;
+            border-color: var(--ultra-accent);
+          }
+        }
+
+
 
 
         .btn-group { display: flex; gap: 12px; }

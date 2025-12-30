@@ -440,7 +440,7 @@ body {
 }
 
 .notes-preview {
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--ultra-surface);
     border: 1px solid var(--ultra-border);
     border-radius: 12px;
     padding: 24px;
@@ -452,6 +452,7 @@ body {
     line-height: 1.8;
     opacity: 0.9;
 }
+
 
 .sketch-preview {
     background: #fff;
