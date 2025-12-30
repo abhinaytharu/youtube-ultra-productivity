@@ -712,8 +712,8 @@
 
         #ultra-status-pill { 
           position: fixed;
-          right: clamp(125px, 12.83vw, 210px);
-          bottom: clamp(4px, 0.80vh, 12px);
+          right: clamp(170px, 16.84vw, 260px);
+          bottom: clamp(8px, 1.43vh, 20px);
           background: rgba(0, 0, 0, 0.6); 
           border: none; 
           padding: 9px 16px; 
