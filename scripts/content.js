@@ -87,6 +87,8 @@
       this.setupObservers();
       this.handleNavigation();
       this.setupNavigationGuard();
+      this.setupActivityTracker();
+      this.setupFullscreenListener();
 
       console.log("Ultra Productivity 3.2: Intent Engine Active");
 
@@ -104,6 +106,38 @@
       });
     }
 
+
+    setupFullscreenListener() {
+      const handleFullscreen = () => {
+        const isFullscreen = !!document.fullscreenElement;
+        const pill = this.shadowRoot?.getElementById('ultra-status-pill');
+        if (pill) {
+          pill.setAttribute('data-fullscreen', isFullscreen);
+        }
+      };
+      document.addEventListener('fullscreenchange', handleFullscreen);
+      handleFullscreen();
+    }
+
+    setupActivityTracker() {
+      let timeout;
+      const resetTimer = () => {
+        const pill = this.shadowRoot?.getElementById('ultra-status-pill');
+        if (pill) {
+          pill.classList.remove('idle');
+          clearTimeout(timeout);
+          // Only auto-hide if in a mode where focus is critical (Monk/Study)
+          timeout = setTimeout(() => {
+            pill.classList.add('idle');
+          }, 3000);
+        }
+      };
+
+      window.addEventListener('mousemove', resetTimer);
+      window.addEventListener('keydown', resetTimer);
+      window.addEventListener('mousedown', resetTimer);
+      resetTimer(); // Init
+    }
 
     setupNavigationGuard() {
       // In Monk Mode, we prevent clicking any "distraction" links
@@ -306,7 +340,7 @@
     injectUI() {
       this.shadowRoot.innerHTML = `
         <style>${this.getShadowStyles()}</style>
-        <div id="ultra-status-pill"><span class="status-dot"></span> Ultra: ${this.currentMode.toUpperCase()}</div>
+        <div id="ultra-status-pill"><span class="status-dot"></span>${this.currentMode.toUpperCase()}</div>
         <div id="ultra-side-panel">
             <div class="ultra-tabs">
                 <div class="ultra-tab active" data-tab="notes">Notes</div>
@@ -675,7 +709,9 @@
         }
 
         #ultra-status-pill { 
-          position: fixed; bottom: 18px; right: 52px; 
+          position: fixed;
+          right: clamp(125px, 12.81vw, 210px);
+          bottom: clamp(4px, 0.78vh, 12px);
           background: rgba(15, 15, 20, 0.8); 
           border: 1px solid var(--ultra-border); 
           padding: 10px 20px; 
@@ -685,14 +721,26 @@
           font-weight: 700; 
           cursor: pointer; 
           z-index: 2147483647; 
-          display: flex; 
+          display: none; /* HIDDEN IN STANDARD MODE */
           align-items: center; 
           gap: 10px; 
           backdrop-filter: blur(12px);
           box-shadow: 0 8px 32px rgba(0,0,0,0.5);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          opacity: 1;
+          visibility: visible;
         }
-        #ultra-status-pill:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.2); }
+        
+        #ultra-status-pill[data-fullscreen="true"] {
+          display: flex; /* ONLY VISIBLE IN FULLSCREEN */
+        }
+
+        #ultra-status-pill.idle { 
+          opacity: 0; 
+          visibility: hidden; 
+          transform: translateY(10px) scale(0.95);
+        }
+        #ultra-status-pill:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.2); opacity: 1 !important; visibility: visible !important; }
 
         .status-dot { 
           width: 10px; height: 10px; background: #00f2fe; border-radius: 50%; 
