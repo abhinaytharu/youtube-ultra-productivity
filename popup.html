@@ -6,28 +6,45 @@
     <title>YouTube Ultra Productivity</title>
     <style>
         :root {
-            --bg: #030303;
-            --surface: rgba(255, 255, 255, 0.04);
-            --accent: #00f2fe;
-            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --text: #ffffff;
-            --text-dim: rgba(255, 255, 255, 0.5);
-            --border: rgba(255, 255, 255, 0.08);
-            --glass-bg: rgba(15, 15, 20, 0.8);
+            /* Common */
+            --ultra-accent: #00f2fe;
+            --ultra-accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+
+            /* Dark Theme (Default) */
+            --ultra-bg: #030303;
+            --ultra-surface: rgba(255, 255, 255, 0.04);
+            --ultra-text-main: #ffffff;
+            --ultra-text-dim: rgba(255, 255, 255, 0.5);
+            --ultra-border: rgba(255, 255, 255, 0.08);
+            --ultra-glass: rgba(15, 15, 20, 0.8);
+            --ultra-dash-bg: radial-gradient(circle at 50% -20%, rgba(79, 172, 254, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(0, 242, 254, 0.05) 0%, transparent 40%);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --ultra-bg: #f8fafc;
+                --ultra-surface: #ffffff;
+                --ultra-text-main: #0f172a;
+                --ultra-text-dim: #475569;
+                --ultra-border: rgba(0, 0, 0, 0.12);
+                --ultra-glass: rgba(255, 255, 255, 0.9);
+                --ultra-dash-bg: radial-gradient(circle at 50% -20%, rgba(79, 172, 254, 0.08) 0%, transparent 60%),
+                    radial-gradient(circle at 100% 100%, rgba(0, 242, 254, 0.03) 0%, transparent 40%);
+            }
         }
 
         body {
             width: 380px;
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: var(--ultra-bg);
+            color: var(--ultra-text-main);
             font-family: 'Inter', -apple-system, sans-serif;
             margin: 0;
             padding: 32px;
             overflow: hidden;
-            background-image:
-                radial-gradient(circle at 50% -20%, rgba(79, 172, 254, 0.15) 0%, transparent 60%),
-                radial-gradient(circle at 100% 100%, rgba(0, 242, 254, 0.05) 0%, transparent 40%);
+            background-image: var(--ultra-dash-bg);
         }
+
 
         .header {
             margin-bottom: 36px;
@@ -38,7 +55,7 @@
             font-size: 24px;
             font-weight: 900;
             letter-spacing: -1.5px;
-            background: var(--accent-gradient);
+            background: var(--ultra-accent-gradient);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -49,10 +66,11 @@
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--text-dim);
+            color: var(--ultra-text-dim);
             margin-top: 8px;
             font-weight: 700;
         }
+
 
         .mode-selector {
             display: flex;
@@ -61,10 +79,10 @@
         }
 
         .mode-option {
-            background: var(--surface);
+            background: var(--ultra-surface);
             padding: 20px;
             border-radius: 20px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--ultra-border);
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(12px);
@@ -76,38 +94,41 @@
         }
 
         .mode-option:hover {
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--ultra-accent);
+            background: var(--ultra-surface);
             transform: scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
 
         .mode-option.active {
-            border-color: var(--accent);
-            background: rgba(0, 242, 254, 0.05);
-            box-shadow: 0 0 30px rgba(0, 242, 254, 0.15);
+            border-color: var(--ultra-accent);
+            background: rgba(0, 242, 254, 0.03);
+            box-shadow: 0 8px 30px rgba(0, 242, 254, 0.1);
         }
 
         .mode-icon {
             width: 44px;
             height: 44px;
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--ultra-surface);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             font-size: 20px;
-            color: var(--accent);
-            border: 1px solid var(--border);
+            color: var(--ultra-accent);
+            border: 1px solid var(--ultra-border);
             transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
         }
 
+
         .mode-option.active .mode-icon {
-            background: var(--accent-gradient);
+            background: var(--ultra-accent-gradient);
             color: #000;
             border-color: transparent;
         }
+
 
         .mode-content {
             flex: 1;
@@ -123,13 +144,13 @@
 
         .mode-desc {
             font-size: 12px;
-            color: var(--text-dim);
+            color: var(--ultra-text-dim);
             line-height: 1.5;
         }
 
         .stats-btn {
             width: 100%;
-            background: var(--accent-gradient);
+            background: var(--ultra-accent-gradient);
             color: #000;
             border: none;
             padding: 18px;
@@ -150,19 +171,20 @@
         .footer {
             margin-top: 32px;
             font-size: 10px;
-            color: var(--text-dim);
+            color: var(--ultra-text-dim);
             text-align: center;
             opacity: 0.8;
             font-weight: 600;
             letter-spacing: 0.5px;
         }
 
+
         /* Master Toggle Switch */
         .master-toggle-container {
-            background: var(--surface);
+            background: var(--ultra-surface);
             padding: 16px 20px;
             border-radius: 20px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--ultra-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -178,12 +200,12 @@
         .toggle-label {
             font-weight: 800;
             font-size: 14px;
-            color: #fff;
+            color: var(--ultra-text-main);
         }
 
         .toggle-status {
             font-size: 11px;
-            color: var(--text-dim);
+            color: var(--ultra-text-dim);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 2px;
@@ -212,7 +234,7 @@
             background-color: rgba(255, 255, 255, 0.1);
             transition: .4s;
             border-radius: 34px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--ultra-border);
         }
 
         .slider:before {
@@ -229,9 +251,10 @@
         }
 
         input:checked+.slider {
-            background: var(--accent-gradient);
+            background: var(--ultra-accent-gradient);
             border-color: transparent;
         }
+
 
         input:checked+.slider:before {
             transform: translateX(24px);

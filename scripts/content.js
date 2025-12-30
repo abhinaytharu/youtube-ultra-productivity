@@ -137,7 +137,17 @@
       window.addEventListener('keydown', resetTimer);
       window.addEventListener('mousedown', resetTimer);
       resetTimer(); // Init
+
+      // System Theme Listener
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const canvas = this.shadowRoot?.getElementById('ultra-canvas');
+        if (canvas && this.ctx) {
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+          this.ctx.strokeStyle = isLightMode ? '#2d3436' : '#fff';
+        }
+      });
     }
+
 
     setupNavigationGuard() {
       // In Monk Mode, we prevent clicking any "distraction" links
@@ -375,16 +385,16 @@
                 </div>
                 <div class="ultra-panel-section" id="ultra-section-resources">
                     <div id="ultra-pdf-viewer">
-                        <div id="ultra-pdf-empty" style="text-align:center; padding:40px 20px; color:#666;">
+                        <div id="ultra-pdf-empty" style="text-align:center; padding:40px 20px; color:var(--ultra-text-dim);">
                             <p>No PDF linked to this session.</p>
                             <button class="ultra-btn-outline" id="ultra-go-analytics" style="margin-top:15px; font-size:12px;">Link PDF in Analytics</button>
                         </div>
                         <div id="ultra-pdf-active" style="display:none;">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                                <span style="font-size:13px; font-weight:600;">Linked Resource</span>
+                                <span style="font-size:13px; font-weight:600; color:var(--ultra-text);">Linked Resource</span>
                                 <button class="ultra-btn-outline" id="ultra-pdf-popout" style="padding:4px 8px; font-size:11px;">Popout</button>
                             </div>
-                            <iframe id="ultra-pdf-frame" style="width:100%; height:550px; border:1px solid #333; border-radius:8px; background:#fff;"></iframe>
+                            <iframe id="ultra-pdf-frame" style="width:100%; height:550px; border:1px solid var(--ultra-border); border-radius:8px; background:#fff;"></iframe>
                         </div>
                     </div>
                 </div>
@@ -545,9 +555,12 @@
 
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
-      this.ctx.strokeStyle = '#000';
+
+      const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
+      this.ctx.strokeStyle = isLightMode ? '#2d3436' : '#fff';
       this.ctx.lineWidth = 2;
       this.ctx.lineCap = 'round';
+
 
       // Restore data if it existed
       if (currentData && currentData !== 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR42mMAAQAABQABognBWAAAAABJRU5ErkJggg==') {
@@ -582,38 +595,38 @@
       const unfinished = allVideos.filter(v => v.status !== 'completed' && (v.progress || 0) > 0);
       const mastered = allVideos.filter(v => v.status === 'completed').length;
       dash.innerHTML = `
-        <div class="dash-container" style="max-width: 1200px; margin: 0 auto; padding: 40px 20px;">
-            <header style="margin-bottom: 60px; animation: fadeIn 0.8s ease-out; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 40px;">
-                <h1 style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 48px; font-weight: 800; letter-spacing: -2px; margin-bottom: 15px;">Intent Queue</h1>
-                <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 25px;">Focus on mastery. One session at a time.</p>
+        <div class="dash-container">
+            <header>
+                <h1 style="background: var(--ultra-accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 56px; font-weight: 800; letter-spacing: -3px; margin-bottom: 10px;">Intent Queue</h1>
+                <p style="color: var(--ultra-text-dim); font-size: 14px; margin-bottom: 25px; opacity: 1;">Focus on mastery. One session at a time.</p>
                 <div style="display: flex; gap: 16px;">
-                    <div class="stat-pill" style="padding: 10px 20px; background: rgba(0, 242, 254, 0.05); border-color: rgba(0, 242, 254, 0.15);"><span class="dot dot-green"></span> <span style="font-weight: 700; color: #fff; margin-right: 4px;">${mastered}</span> Mastered</div>
-                    <div class="stat-pill" style="padding: 10px 20px; background: rgba(247, 92, 126, 0.05); border-color: rgba(247, 92, 126, 0.15);"><span class="dot dot-red"></span> <span style="font-weight: 700; color: #fff; margin-right: 4px;">${unfinished.length}</span> Remaining</div>
+                    <div class="stat-pill" style="padding: 10px 20px; background: var(--ultra-surface); border-color: var(--ultra-border);"><span class="dot dot-green"></span> <span style="font-weight: 700; color: var(--ultra-text-main); margin-right: 4px;">${mastered}</span> Mastered</div>
+                    <div class="stat-pill" style="padding: 10px 20px; background: var(--ultra-surface); border-color: var(--ultra-border);"><span class="dot dot-red"></span> <span style="font-weight: 700; color: var(--ultra-text-main); margin-right: 4px;">${unfinished.length}</span> Remaining</div>
                 </div>
             </header>
 
             <div class="dash-grid">
                 ${unfinished.map(v => v.videoId ? `
                     <div class="dash-card" onclick="location.href='/watch?v=${v.videoId}'">
-                        <span class="id" style="font-size: 10px; opacity: 0.6; letter-spacing: 1px;">${v.channel || 'EDUCATIONAL'}</span>
-                        <div class="title-stub" style="font-size: 20px; margin: 12px 0 20px; line-height: 1.4; height: 56px; overflow: hidden;">${v.title || 'In-Progress Learning'}</div>
+                        <span class="id">${v.channel || 'EDUCATIONAL'}</span>
+                        <div class="title-stub">${v.title || 'In-Progress Learning'}</div>
                         
                         <div style="margin-top:auto;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px;">
-                                <span style="color: var(--accent-color); font-weight: 600;">${v.progress || 0}% Complete</span>
-                                <span style="color: rgba(255,255,255,0.4);">${this.formatSeconds(v.timeSpent || 0)} spent</span>
+                                <span style="color: var(--ultra-accent); font-weight: 700;">${v.progress || 0}% Complete</span>
+                                <span style="color: var(--ultra-text-dim);">${this.formatSeconds(v.timeSpent || 0)} spent</span>
                             </div>
-                            <div class="progress-bar-outer" style="height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden;">
-                                <div style="width: ${v.progress || 0}%; background: var(--accent-gradient); height: 100%; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);"></div>
+                            <div class="progress-bar-outer" style="height: 6px; background: var(--ultra-border); border-radius: 3px; overflow: hidden;">
+                                <div style="width: ${v.progress || 0}%; background: var(--ultra-accent-gradient); height: 100%; box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);"></div>
                             </div>
-                            ${v.exitReason ? `<p style="margin-top: 15px; font-size: 11px; color: rgba(255,255,255,0.4); font-style: italic; border-top: 1px solid rgba(255,255,255,0.03); padding-top: 10px;">Intention: ${v.exitReason}</p>` : ''}
+                            ${v.exitReason ? `<p style="margin-top: 15px; font-size: 11px; color: var(--ultra-text-dim); font-style: italic; border-top: 1px solid var(--ultra-border); padding-top: 10px;">Intention: ${v.exitReason}</p>` : ''}
                         </div>
                     </div>
                 ` : '').join('')}
                 ${unfinished.length === 0 ? `
-                    <div style="grid-column: 1/-1; padding: 100px 40px; text-align: center; background: rgba(255,255,255,0.01); border: 1px dashed rgba(255,255,255,0.05); border-radius: 20px;">
-                        <h2 style="font-size: 24px; color: #fff; margin-bottom: 10px;">The Queue is Empty</h2>
-                        <p style="color: #666; font-size: 14px;">Mastery is a slow process. Find a high-value subject and start your next session.</p>
+                    <div style="grid-column: 1/-1; padding: 100px 40px; text-align: center; background: var(--ultra-surface); border: 1px dashed var(--ultra-border); border-radius: 20px; color: var(--ultra-text-dim);">
+                        <h2 style="font-size: 24px; color: var(--ultra-text-main); margin-bottom: 10px;">The Queue is Empty</h2>
+                        <p style="font-size: 14px;">Mastery is a slow process. Find a high-value subject and start your next session.</p>
                     </div>
                 ` : ''}
             </div>
@@ -701,21 +714,24 @@
     getShadowStyles() {
       return `
         :host { 
-          --ultra-bg: #050505; 
-          --ultra-surface: rgba(15, 15, 20, 0.95); 
-          --ultra-accent: #00f2fe; 
-          --ultra-border: rgba(255, 255, 255, 0.08); 
-          --ultra-text: #fff; 
+          --ultra-bg: var(--ultra-bg, #050505); 
+          --ultra-surface: var(--ultra-surface, rgba(15, 15, 20, 0.95)); 
+          --ultra-accent: var(--ultra-accent, #00f2fe); 
+          --ultra-border: var(--ultra-border, rgba(255, 255, 255, 0.08)); 
+          --ultra-text: var(--ultra-text-main, #fff); 
           --ultra-panel-width: 440px; 
-          --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+          --accent-gradient: var(--ultra-accent-gradient, linear-gradient(135deg, #4facfe 0%, #00f2fe 100%));
+          --ultra-glass: var(--ultra-glass, rgba(15, 15, 20, 0.8));
+          --ultra-shadow: var(--ultra-shadow, 0 30px 60px rgba(0, 0, 0, 0.7));
+          --ultra-surface-hover: var(--ultra-surface-hover, rgba(255, 255, 255, 0.05));
         }
 
         #ultra-status-pill { 
           position: fixed;
           right: clamp(170px, 16.84vw, 260px);
           bottom: clamp(8px, 1.43vh, 20px);
-          background: rgba(0, 0, 0, 0.6); 
-          border: none; 
+          background: var(--ultra-glass); 
+          border: 1px solid var(--ultra-border); 
           padding: 9px 16px; 
           border-radius: 30px; 
           color: var(--ultra-text); 
@@ -726,8 +742,8 @@
           display: none; /* HIDDEN IN STANDARD MODE */
           align-items: center; 
           gap: 12px; 
-          backdrop-filter: none;
-          box-shadow: none;
+          backdrop-filter: blur(10px);
+          box-shadow: var(--ultra-shadow);
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           opacity: 1;
           visibility: visible;
@@ -742,7 +758,8 @@
           visibility: hidden; 
           transform: translateY(10px) scale(0.95);
         }
-        #ultra-status-pill:hover { background: rgba(0, 0, 0, 0.8); opacity: 1 !important; visibility: visible !important; }
+        #ultra-status-pill:hover { background: var(--ultra-surface); opacity: 1 !important; visibility: visible !important; }
+
 
         .status-dot { 
           width: 10px; height: 10px; background: #00f2fe; border-radius: 50%; 
@@ -759,7 +776,7 @@
           position: fixed; right: calc(-1 * var(--ultra-panel-width) - 20px); top: 10px; 
           width: var(--ultra-panel-width); 
           height: calc(100vh - 40px); 
-          background: var(--ultra-surface); 
+          background: var(--ultra-glass); 
           border: 1px solid var(--ultra-border); 
           border-radius: 24px;
           margin-right: 10px;
@@ -767,21 +784,21 @@
           transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
           display: flex; 
           flex-direction: column; 
-          backdrop-filter: blur(20px);
-          box-shadow: -20px 0 60px rgba(0,0,0,0.8); 
+          backdrop-filter: blur(30px);
+          box-shadow: var(--ultra-shadow); 
           overflow: hidden;
         }
         #ultra-side-panel.open { right: 0; }
 
         .ultra-tabs { 
           display: flex; 
-          background: rgba(0,0,0,0.2); 
+          background: var(--ultra-surface); 
           padding: 8px;
           gap: 4px;
         }
         .ultra-tab { 
           padding: 10px; 
-          color: rgba(255,255,255,0.4); 
+          color: var(--ultra-text-dim); 
           cursor: pointer; 
           font-size: 12px; 
           font-weight: 700;
@@ -799,7 +816,7 @@
           border: 1px solid rgba(0, 242, 254, 0.2);
         }
 
-        .ultra-content { flex: 1; overflow-y: auto; padding: 28px; color: #fff; scrollbar-width: none; }
+        .ultra-content { flex: 1; overflow-y: auto; padding: 28px; color: var(--ultra-text); scrollbar-width: none; }
         .ultra-content::-webkit-scrollbar { display: none; }
 
         .ultra-panel-section { display: none; animation: fadeIn 0.3s ease-out; }
@@ -809,10 +826,10 @@
 
         #ultra-notes-editor { 
           width: 100%; height: 300px; 
-          background: rgba(0,0,0,0.3); 
+          background: var(--ultra-surface-hover); 
           border: 1px solid var(--ultra-border); 
           border-radius: 16px; 
-          color: #fff; 
+          color: var(--ultra-text); 
           padding: 20px; 
           font-family: inherit; 
           font-size: 15px;
@@ -820,15 +837,16 @@
           resize: none; 
           margin-bottom: 20px; 
           outline: none;
-          transition: border-color 0.3s;
+          transition: all 0.3s;
         }
-        #ultra-notes-editor:focus { border-color: rgba(255,255,255,0.2); }
+        #ultra-notes-editor:focus { border-color: var(--ultra-accent); background: var(--ultra-surface); box-shadow: var(--ultra-shadow); }
+
 
         .btn-group { display: flex; gap: 12px; }
         .ultra-btn { 
           flex: 1;
           background: var(--accent-gradient); 
-          color: #000; 
+          color: var(--ultra-bg); 
           border: none; 
           padding: 14px; 
           border-radius: 14px; 
@@ -842,8 +860,8 @@
         
         .ultra-btn-outline { 
           flex: 1;
-          background: rgba(255,255,255,0.03); 
-          color: #fff; 
+          background: var(--ultra-surface); 
+          color: var(--ultra-text); 
           border: 1px solid var(--ultra-border); 
           padding: 14px; 
           border-radius: 14px; 
@@ -851,8 +869,10 @@
           font-size: 14px;
           cursor: pointer; 
           transition: all 0.3s;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .ultra-btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+        .ultra-btn-outline:hover { background: var(--ultra-surface-hover); border-color: var(--ultra-accent); transform: translateY(-1px); }
+
 
         #ultra-sketchpad-container { 
           width: 100%; height: 400px; 
@@ -867,29 +887,31 @@
         
         #ultra-exit-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.92); z-index: 2147483647; display: none; justify-content: center; align-items: center; backdrop-filter: blur(10px); }
         .ultra-modal-box { 
-          background: #111; 
+          background: var(--ultra-bg); 
           padding: 50px; 
           border-radius: 30px; 
           width: 440px; 
           border: 1px solid var(--ultra-border); 
           text-align: center; 
-          color: #fff; 
-          box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+          color: var(--ultra-text); 
+          box-shadow: var(--ultra-shadow);
           animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         
         #ultra-exit-reason { 
           width: 100%; height: 120px; 
-          background: rgba(255,255,255,0.02); 
+          background: var(--ultra-surface); 
           border: 1px solid var(--ultra-border); 
-          color: #fff; 
+          color: var(--ultra-text); 
           padding: 16px; 
           border-radius: 16px; 
           margin: 30px 0; 
           resize: none;
           outline: none;
         }
+
 
         .progress-bar-outer { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; margin: 25px 0 10px; }
         #ultra-prog-inner { height: 100%; background: var(--accent-gradient); width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }

@@ -257,14 +257,15 @@ class AnalyticsManager {
             const width = (val / maxVal) * 100;
             html += `
                 <div style="display:flex; align-items:center; gap:12px;">
-                    <div style="width:100px; font-size:11px; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${name}</div>
-                    <div style="flex:1; background:rgba(255,255,255,0.05); height:12px; border-radius:6px; overflow:hidden;">
-                        <div style="width:${width}%; background:var(--accent-gradient); height:100%; box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);"></div>
+                    <div style="width:100px; font-size:11px; color:var(--ultra-text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${name}</div>
+                    <div style="flex:1; background:var(--ultra-surface); height:12px; border-radius:6px; overflow:hidden;">
+                        <div style="width:${width}%; background:var(--ultra-accent-gradient); height:100%; box-shadow: 0 0 10px rgba(79, 172, 254, 0.3);"></div>
                     </div>
-                    <div style="width:60px; font-size:11px; color:#fff;">${this.formatSeconds(val)}</div>
+                    <div style="width:60px; font-size:11px; color:var(--ultra-text-main);">${this.formatSeconds(val)}</div>
                 </div>
             `;
         });
+
         html += '</div>';
         container.innerHTML = html;
     }
@@ -291,13 +292,14 @@ class AnalyticsManager {
             const height = (d.count / maxVal) * 150;
             html += `
                 <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:12px;">
-                    <div style="width:32px; height:${height}px; background:var(--accent-gradient); border-radius:6px 6px 0 0; position:relative; box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);">
-                        <span style="position:absolute; top:-22px; font-size:10px; color:var(--accent-color); font-weight:700; width:100%; text-align:center;">${d.count}</span>
+                    <div style="width:32px; height:${height}px; background:var(--ultra-accent-gradient); border-radius:6px 6px 0 0; position:relative; box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);">
+                        <span style="position:absolute; top:-22px; font-size:10px; color:var(--ultra-accent); font-weight:700; width:100%; text-align:center;">${d.count}</span>
                     </div>
-                    <div style="font-size:10px; color:var(--text-secondary); width:60px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${d.title}</div>
+                    <div style="font-size:10px; color:var(--ultra-text-dim); width:60px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${d.title}</div>
                 </div>
             `;
         });
+
         html += '</div>';
         container.innerHTML = html;
     }
@@ -324,9 +326,10 @@ class AnalyticsManager {
                 </div>
 
                 <div class="form-group">
-                    <label style="display:block; margin-bottom:10px; font-weight:700; font-size:12px; text-transform:uppercase; color:var(--text-secondary);">Session Notes</label>
-                    <textarea id="edit-notes" style="width:100%; height:200px; background:rgba(0,0,0,0.3); border:1px solid var(--border-color); border-radius:12px; color:#fff; padding:15px; font-family:inherit; resize:vertical;">${video.notes || ''}</textarea>
+                    <label style="display:block; margin-bottom:10px; font-weight:700; font-size:12px; text-transform:uppercase; color:var(--ultra-text-dim);">Session Notes</label>
+                    <textarea id="edit-notes" style="width:100%; height:200px; background:var(--ultra-surface); border:1px solid var(--ultra-border); border-radius:12px; color:var(--ultra-text-main); padding:15px; font-family:inherit; resize:vertical;">${video.notes || ''}</textarea>
                 </div>
+
 
                 <button id="save-edit-btn" class="btn" style="background:var(--accent-gradient); color:#000; font-weight:800; padding:15px; margin-top:10px;">Save Changes</button>
             </div>

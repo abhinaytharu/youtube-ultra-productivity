@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function updateEnabledUI(enabled) {
         statusText.textContent = enabled ? 'Active' : 'Disabled';
-        statusText.style.color = enabled ? 'var(--accent)' : 'var(--text-dim)';
+        statusText.style.color = enabled ? 'var(--ultra-accent)' : 'var(--ultra-text-dim)';
         modeSelector.style.opacity = enabled ? '1' : '0.4';
         modeSelector.style.pointerEvents = enabled ? 'all' : 'none';
 
@@ -55,10 +55,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             container.style.borderColor = 'rgba(0, 242, 254, 0.3)';
             container.style.background = 'rgba(0, 242, 254, 0.05)';
         } else {
-            container.style.borderColor = 'var(--border)';
-            container.style.background = 'var(--surface)';
+            container.style.borderColor = 'var(--ultra-border)';
+            container.style.background = 'var(--ultra-surface)';
         }
     }
+
 });
 
 function updateActiveUI(mode) {
