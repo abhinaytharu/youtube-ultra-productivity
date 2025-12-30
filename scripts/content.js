@@ -176,7 +176,7 @@
       // Hide/Show Status Pill
       const pill = this.shadowRoot?.getElementById('ultra-status-pill');
       if (pill) {
-        pill.style.display = this.isEnabled ? 'flex' : 'none';
+        pill.style.display = this.isEnabled ? '' : 'none';
       }
 
       // Hide/Show Dashboard (if exists)
@@ -295,7 +295,7 @@
       }
 
       const pill = this.shadowRoot.getElementById('ultra-status-pill');
-      if (pill) pill.innerHTML = `<span class="status-dot"></span> Ultra: ${this.currentMode.toUpperCase()}`;
+      if (pill) pill.innerHTML = `<span class="status-dot"></span>Panel`;
       this.handleNavigation();
     }
 
@@ -340,7 +340,9 @@
     injectUI() {
       this.shadowRoot.innerHTML = `
         <style>${this.getShadowStyles()}</style>
-        <div id="ultra-status-pill"><span class="status-dot"></span>${this.currentMode.toUpperCase()}</div>
+        <div id="ultra-status-pill">
+          <span class="status-dot"></span>Panel
+        </div>
         <div id="ultra-side-panel">
             <div class="ultra-tabs">
                 <div class="ultra-tab active" data-tab="notes">Notes</div>
@@ -710,22 +712,22 @@
 
         #ultra-status-pill { 
           position: fixed;
-          right: clamp(125px, 12.81vw, 210px);
-          bottom: clamp(4px, 0.78vh, 12px);
-          background: rgba(15, 15, 20, 0.8); 
-          border: 1px solid var(--ultra-border); 
-          padding: 10px 20px; 
+          right: clamp(125px, 12.83vw, 210px);
+          bottom: clamp(4px, 0.80vh, 12px);
+          background: rgba(0, 0, 0, 0.6); 
+          border: none; 
+          padding: 9px 16px; 
           border-radius: 30px; 
           color: var(--ultra-text); 
-          font-size: 13px; 
-          font-weight: 700; 
+          font-size: 14px; 
+          font-weight: 500; 
           cursor: pointer; 
           z-index: 2147483647; 
           display: none; /* HIDDEN IN STANDARD MODE */
           align-items: center; 
-          gap: 10px; 
-          backdrop-filter: blur(12px);
-          box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+          gap: 12px; 
+          backdrop-filter: none;
+          box-shadow: none;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           opacity: 1;
           visibility: visible;
@@ -740,7 +742,7 @@
           visibility: hidden; 
           transform: translateY(10px) scale(0.95);
         }
-        #ultra-status-pill:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.2); opacity: 1 !important; visibility: visible !important; }
+        #ultra-status-pill:hover { background: rgba(0, 0, 0, 0.8); opacity: 1 !important; visibility: visible !important; }
 
         .status-dot { 
           width: 10px; height: 10px; background: #00f2fe; border-radius: 50%; 
