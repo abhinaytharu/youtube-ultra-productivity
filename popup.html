@@ -156,6 +156,87 @@
             font-weight: 600;
             letter-spacing: 0.5px;
         }
+
+        /* Master Toggle Switch */
+        .master-toggle-container {
+            background: var(--surface);
+            padding: 16px 20px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            backdrop-filter: blur(12px);
+        }
+
+        .toggle-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toggle-label {
+            font-weight: 800;
+            font-size: 14px;
+            color: #fff;
+        }
+
+        .toggle-status {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: .4s;
+            border-radius: 34px;
+            border: 1px solid var(--border);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        input:checked+.slider {
+            background: var(--accent-gradient);
+            border-color: transparent;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(24px);
+            background-color: #000;
+        }
     </style>
 </head>
 
@@ -163,6 +244,17 @@
     <div class="header">
         <h1>ULTRA</h1>
         <p>Productivity System</p>
+    </div>
+
+    <div class="master-toggle-container">
+        <div class="toggle-info">
+            <span class="toggle-label">System Status</span>
+            <span class="toggle-status" id="status-text">Active</span>
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="master-toggle" checked>
+            <span class="slider"></span>
+        </label>
     </div>
 
     <div class="mode-selector">

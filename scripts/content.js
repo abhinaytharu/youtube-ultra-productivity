@@ -24,6 +24,9 @@
     const target = document.activeElement;
     const isTyping = isTextInput(target);
 
+    // CRITICAL: Respect master enable/disable toggle
+    if (window._ultra && !window._ultra.isEnabled) return;
+
     // 1. Always allow modifier keys themselves
     if (['Control', 'Alt', 'Shift', 'Meta'].includes(e.key)) return;
 
@@ -86,6 +89,19 @@
       this.setupNavigationGuard();
 
       console.log("Ultra Productivity 3.2: Intent Engine Active");
+
+      // Listen for settings changes from popup
+      chrome.storage.onChanged.addListener((changes, area) => {
+        if (area === 'local' && changes.ultra_settings) {
+          const settings = changes.ultra_settings.newValue;
+          if (settings) {
+            this.currentMode = settings.mode;
+            this.isEnabled = settings.enabled;
+            this.applyGlobalState();
+            this.handleNavigation(); // Refresh view
+          }
+        }
+      });
     }
 
 
@@ -120,8 +136,36 @@
     }
 
     applyGlobalState() {
-      document.documentElement.setAttribute('data-ultra-mode', this.currentMode);
+      document.documentElement.setAttribute('data-ultra-mode', this.isEnabled ? this.currentMode : 'casual');
       document.documentElement.setAttribute('data-ultra-lock', (this.isEnabled && this.currentMode !== 'casual') ? 'on' : 'off');
+
+      // Hide/Show Status Pill
+      const pill = this.shadowRoot?.getElementById('ultra-status-pill');
+      if (pill) {
+        pill.style.display = this.isEnabled ? 'flex' : 'none';
+      }
+
+      // Hide/Show Dashboard (if exists)
+      const dash = document.getElementById('ultra-monk-dashboard');
+      if (dash) {
+        if (this.isEnabled && this.currentMode !== 'casual') {
+          dash.style.display = 'block';
+        } else {
+          dash.style.display = 'none';
+        }
+      }
+
+      // Navbar Controls
+      const controls = document.getElementById('ultra-navbar-controls');
+      if (controls) {
+        controls.style.display = this.isEnabled ? 'flex' : 'none';
+      }
+
+      // Watch Page Learn Panel Button
+      const learnBtn = document.getElementById('ultra-open-panel-btn');
+      if (learnBtn) {
+        learnBtn.style.display = this.isEnabled ? 'inline-block' : 'none';
+      }
     }
 
     setupShadowDOM() {
@@ -151,6 +195,7 @@
     }
 
     ensureLayout() {
+      if (!this.isEnabled) return;
       if (!this.shadowRoot.getElementById('ultra-side-panel')) this.injectUI();
       this.syncLayout();
       this.injectNavbarButtons();
@@ -247,6 +292,8 @@
     }
 
     handleNavigation() {
+      if (!this.isEnabled) return;
+
       const videoId = new URLSearchParams(window.location.search).get('v');
       this.activeVideoId = videoId;
       if (videoId) {
