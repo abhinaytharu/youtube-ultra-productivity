@@ -556,8 +556,8 @@
       canvas.width = container.clientWidth;
       canvas.height = container.clientHeight;
 
-      const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches;
-      this.ctx.strokeStyle = isLightMode ? '#2d3436' : '#fff';
+      // Use dark color for sketch in both light and dark modes
+      this.ctx.strokeStyle = '#2d3436';
       this.ctx.lineWidth = 2;
       this.ctx.lineCap = 'round';
 
