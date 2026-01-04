@@ -19,6 +19,8 @@
             --ultra-glass: rgba(15, 15, 20, 0.8);
             --ultra-dash-bg: radial-gradient(circle at 50% -20%, rgba(79, 172, 254, 0.15) 0%, transparent 60%),
                 radial-gradient(circle at 100% 100%, rgba(0, 242, 254, 0.05) 0%, transparent 40%);
+            /* Font Outline for visibility on white */
+            --ultra-text-outline: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
         }
 
         @media (prefers-color-scheme: light) {
@@ -31,6 +33,7 @@
                 --ultra-glass: rgba(255, 255, 255, 0.9);
                 --ultra-dash-bg: radial-gradient(circle at 50% -20%, rgba(79, 172, 254, 0.08) 0%, transparent 60%),
                     radial-gradient(circle at 100% 100%, rgba(0, 242, 254, 0.03) 0%, transparent 40%);
+                --ultra-text-outline: none;
             }
         }
 
@@ -43,6 +46,7 @@
             padding: 32px;
             overflow: hidden;
             background-image: var(--ultra-dash-bg);
+            text-shadow: var(--ultra-text-outline);
         }
 
 

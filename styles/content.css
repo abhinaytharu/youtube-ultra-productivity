@@ -21,6 +21,7 @@
   --ultra-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
   --ultra-dash-bg: radial-gradient(circle at 10% 20%, rgba(79, 172, 254, 0.05) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.05) 0%, transparent 40%);
+  --ultra-text-outline: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 @media (prefers-color-scheme: light) {
@@ -35,6 +36,7 @@
     --ultra-shadow: 0 20px 50px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
     --ultra-dash-bg: radial-gradient(circle at 10% 20%, rgba(79, 172, 254, 0.06) 0%, transparent 40%),
       radial-gradient(circle at 90% 80%, rgba(0, 242, 254, 0.06) 0%, transparent 40%);
+    --ultra-text-outline: none;
   }
 }
 
@@ -114,6 +116,7 @@
   box-sizing: border-box;
   background-image: var(--ultra-dash-bg);
   scrollbar-width: none;
+  text-shadow: var(--ultra-text-outline);
 }
 
 #ultra-monk-dashboard::-webkit-scrollbar {
@@ -256,6 +259,7 @@ body.ultra-panel-open ytd-watch-flexy[flexy] {
   gap: 10px;
   margin-right: 20px;
   margin-left: 10px;
+  text-shadow: var(--ultra-text-outline);
 }
 
 .ultra-nav-btn {
